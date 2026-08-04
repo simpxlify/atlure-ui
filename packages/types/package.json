@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
-    "test": "node --test \"test/**/*.test.js\""
+    "test": "pnpm run build && node --test \"test/**/*.test.js\""
   },
   "devDependencies": {
     "@types/node": "22.19.0",
