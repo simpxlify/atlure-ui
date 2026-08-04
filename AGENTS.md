@@ -21,6 +21,22 @@ corepack enable pnpm
 
 Pinned to `pnpm@11.20.0` via `packageManager`. Note that pnpm 11 **no longer reads the `pnpm` field in `package.json`** — settings belong in `.npmrc` or `pnpm-workspace.yaml`.
 
+### `pnpm install` exiting 1 with ERR_PNPM_IGNORED_BUILDS
+
+Any package pulling in `esbuild` (Vitest, Vite, Storybook) makes `pnpm install` exit **1** even though the install succeeded. The fix, verified empirically:
+
+```
+pnpm approve-builds --all
+```
+
+This runs the pending postinstall scripts and writes `allowBuilds: { esbuild: true }` into `pnpm-workspace.yaml`. Afterwards `pnpm install` exits 0, including from a clean slate, which is the CI case. **Commit that block** so CI installs cleanly.
+
+The key is **`allowBuilds`**. These were all tested and all still exit 1 — do not retry them: `onlyBuiltDependencies`, `ignoredBuiltDependencies`, `strict-dep-builds=false`, `dangerously-allow-all-builds`, the `--no-strict-dep-builds` flag, and `npm_config_strict_dep_builds`.
+
+Never work around this with `--ignore-scripts`. esbuild genuinely needs its postinstall to place its platform binary, so skipping it moves the failure from install time to runtime.
+
+`packages/tokens` avoids the problem entirely by having no esbuild dependency — it uses `typescript` plus the Node test runner. That is deliberate for the root of the dependency graph, and is not a pattern to copy into component packages, which should use Vitest per `CONVENTIONS.md`.
+
 Node is pinned by `.nvmrc` (22.16.0). The tokens package deliberately avoids `esbuild`, `tsx` and `vitest`, using only `typescript` and Node's built-in test runner.
 
 ## Versions are pinned deliberately
