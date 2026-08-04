@@ -8,3 +8,4 @@ added release.yml (sole publisher), changeset-status.yml, secret-scan.yml
 proved changeset gate: committed packages/ change with no changeset exits 1
 proved fixed group: bumping @atlure/types minor moved all three packages to 0.2.0
 added RELEASING.md; all local gates green (typecheck, test, build, git diff, verify:packaging)
+fixed gitleaks: needed pull-requests read to list PR commits
