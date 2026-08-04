@@ -105,6 +105,11 @@ changing how it looks.
 `pnpm test` runs Vitest with React Testing Library. `react-native` is aliased to `react-native-web`
 so components render into jsdom and can be queried by role and accessible name.
 
+`@atlure/tokens` is resolved to `../tokens/src` for typechecking and testing, via `paths` in
+`tsconfig.json` and an alias in `vitest.config.ts`. Published consumers still get `dist` through that
+package's `exports`; resolving to source here means this package's checks do not depend on tokens having
+been built first, and can never read a stale `dist`.
+
 What that proves: press handling, disabled and loading behaviour, controlled toggle state, change
 propagation, accessible roles and names, and the barrel generator's output.
 

@@ -1,4 +1,8 @@
+import { fileURLToPath } from "node:url";
+
 import { defineConfig } from "vitest/config";
+
+const tokensSourceEntry = fileURLToPath(new URL("../tokens/src/index.ts", import.meta.url));
 
 export default defineConfig({
   esbuild: {
@@ -6,7 +10,10 @@ export default defineConfig({
     jsxImportSource: "react",
   },
   resolve: {
-    alias: [{ find: /^react-native$/, replacement: "react-native-web" }],
+    alias: [
+      { find: /^react-native$/, replacement: "react-native-web" },
+      { find: /^@atlure\/tokens$/, replacement: tokensSourceEntry },
+    ],
   },
   test: {
     globals: true,
