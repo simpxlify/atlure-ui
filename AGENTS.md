@@ -2,9 +2,11 @@
 
 Standing rules. They apply to every change, human or agent.
 
+**Read `CONVENTIONS.md` first** — it holds the shared Atlure engineering conventions (naming, branches, SOLID/YAGNI/KISS, mobile-first, required UI states, file organisation, React patterns, i18n, testing, PR format, stacked worktrees, self-review checklist). This file covers only what is specific to `atlure-ui`.
+
 ## Absolute
 
-- **No code comments.** No `//`, no `/* */`, no explanatory `#` in YAML. Use self-documenting names instead. This is a project-wide rule, not a style preference.
+- **No code comments.** No `//`, no `/* */`, no explanatory `#` in YAML. Use self-documenting names instead. The only justified exception is a genuinely counterintuitive *why* — a lint suppression, a library-bug workaround, a non-obvious platform rule — which should be rare enough to count on one hand. Never comment test files.
 - **Never hand-edit anything under a `generated/` directory.** A committed checksum will fail the tests, and CI runs `git diff --exit-code` after building. Change `packages/tokens/src/tokens.ts` and regenerate.
 - **Never hand-edit `pnpm-lock.yaml`.** On a conflict, take the incoming version and re-run `pnpm install`.
 - **Never publish from a laptop.** Releases go through the release workflow only. The predecessor package shipped 28 versions in 16 days by publishing locally.
