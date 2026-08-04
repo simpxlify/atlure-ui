@@ -1,0 +1,5 @@
+@import '@atlure/tokens/theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
