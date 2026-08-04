@@ -1,0 +1,77 @@
+{
+  "name": "@atlure/ui",
+  "version": "0.1.0",
+  "description": "Atlure React Native component library: NativeWind primitives built on @atlure/tokens, shipped as untranspiled TypeScript source",
+  "license": "MIT",
+  "author": "David Moreira",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpxlify/atlure-ui.git",
+    "directory": "packages/ui"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./variants": {
+      "types": "./src/variants/index.ts",
+      "default": "./src/variants/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "!src/**/*.test.ts",
+    "!src/**/*.test.tsx",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "generate:barrel": "node scripts/generate-barrel.mjs",
+    "build": "pnpm run generate:barrel",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@atlure/tokens": "workspace:*",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "2.6.0"
+  },
+  "peerDependencies": {
+    "nativewind": "^4.2.6",
+    "react": ">=18.3.0",
+    "react-native": ">=0.81.0",
+    "react-native-reanimated": ">=3.16.0",
+    "react-native-safe-area-context": ">=4.10.0",
+    "tailwindcss": "^3.4.19"
+  },
+  "peerDependenciesMeta": {
+    "react-native-reanimated": {
+      "optional": true
+    },
+    "react-native-safe-area-context": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/react": "16.3.0",
+    "@types/react": "19.1.8",
+    "jsdom": "26.1.0",
+    "nativewind": "4.2.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-web": "0.21.1",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  }
+}
