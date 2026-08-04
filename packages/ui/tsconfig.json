@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@atlure/tokens": ["../tokens/src/index.ts"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "nativewind",
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom/vitest"]
+  },
+  "include": ["src", "test-utils", "vitest.config.ts"]
+}
