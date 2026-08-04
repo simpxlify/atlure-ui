@@ -27,6 +27,10 @@
   "scripts": {
     "build": "echo generated-by-tokens-package",
     "typecheck": "echo no-typescript-sources",
-    "test": "echo covered-by-tokens-parity-tests"
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.19",
+    "postcss": "8.5.6"
   }
 }
