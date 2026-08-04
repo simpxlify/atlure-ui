@@ -27,7 +27,7 @@
   "scripts": {
     "build": "echo generated-by-tokens-package",
     "typecheck": "echo no-typescript-sources",
-    "test": "node --test \"test/**/*.test.js\""
+    "test": "pnpm --filter @atlure/tokens generate && node --test \"test/**/*.test.js\""
   },
   "devDependencies": {
     "tailwindcss": "3.4.19",
