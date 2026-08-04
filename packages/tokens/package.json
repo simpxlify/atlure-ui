@@ -1,0 +1,46 @@
+{
+  "name": "@atlure/tokens",
+  "version": "0.1.0",
+  "description": "Atlure design tokens: the single source of truth for color, spacing, radius and type scales across web and React Native",
+  "license": "MIT",
+  "author": "David Moreira",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpxlify/atlure-ui.git",
+    "directory": "packages/tokens"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./theme.css": "./generated/theme.css",
+    "./native.css": "./generated/native.css",
+    "./theme.v4.css": "./generated/theme.v4.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "generated",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "compile:tools": "tsc -p tsconfig.tools.json",
+    "generate": "pnpm run compile:tools && node .build/scripts/build-tokens.js",
+    "build": "pnpm run generate && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.tools.json --noEmit",
+    "test": "pnpm run generate && node --test \".build/test/**/*.test.js\"",
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true});fs.rmSync('generated',{recursive:true,force:true});fs.rmSync('.build',{recursive:true,force:true})\""
+  },
+  "devDependencies": {
+    "@types/node": "22.19.0",
+    "typescript": "5.9.3"
+  }
+}

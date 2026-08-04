@@ -1,0 +1,82 @@
+/* atlure-generated-do-not-edit */
+@layer base {
+  :root {
+    --background: 33.3 100% 96.5%;
+    --foreground: 224.4 64.3% 32.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 224.4 64.3% 32.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224.4 64.3% 32.9%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 32.1 97.7% 83.1%;
+    --secondary-foreground: 224.4 64.3% 32.9%;
+    --muted: 36.4 93.3% 94.1%;
+    --muted-foreground: 225.9 70.7% 40.2%;
+    --accent: 30.7 97.2% 72.4%;
+    --accent-foreground: 224.4 64.3% 32.9%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 20.5 90.2% 48.2%;
+    --input: 20.5 90.2% 48.2%;
+    --input-background: 0 0% 100%;
+    --ring: 20.5 90.2% 48.2%;
+    --chart-1: 20.5 90.2% 48.2%;
+    --chart-2: 224.4 64.3% 32.9%;
+    --chart-3: 30.7 97.2% 72.4%;
+    --chart-4: 225.9 70.7% 40.2%;
+    --chart-5: 32.1 97.7% 83.1%;
+    --radius: 0.625rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.625rem;
+    --radius-xl: 0.875rem;
+    --radius-full: 9999px;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.25rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+    --spacing-3xl: 2.5rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --control-height-sm: 2.25rem;
+    --control-height-md: 2.5rem;
+    --control-height-lg: 3rem;
+    --control-height-icon: 2.5rem;
+  }
+
+  .dark:root {
+    --background: 222.2 47.4% 11.2%;
+    --foreground: 210 40% 96.1%;
+    --card: 217.2 32.6% 17.5%;
+    --card-foreground: 210 40% 96.1%;
+    --popover: 217.2 32.6% 17.5%;
+    --popover-foreground: 210 40% 96.1%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215.3 25% 26.7%;
+    --secondary-foreground: 210 40% 96.1%;
+    --muted: 215.3 25% 26.7%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 215.3 19.3% 34.5%;
+    --accent-foreground: 210 40% 96.1%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 96.1%;
+    --border: 215.3 25% 26.7%;
+    --input: 215.3 25% 26.7%;
+    --input-background: 217.2 32.6% 17.5%;
+    --ring: 20.5 90.2% 48.2%;
+    --chart-1: 20.5 90.2% 48.2%;
+    --chart-2: 217.2 91.2% 59.8%;
+    --chart-3: 30.7 97.2% 72.4%;
+    --chart-4: 213.1 93.9% 67.8%;
+    --chart-5: 32.1 97.7% 83.1%;
+  }
+}

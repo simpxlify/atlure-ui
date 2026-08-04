@@ -1,0 +1,32 @@
+{
+  "name": "@atlure/tailwind-preset",
+  "version": "0.1.0",
+  "description": "Atlure Tailwind preset, generated from @atlure/tokens and shared by web (Tailwind) and mobile (NativeWind)",
+  "license": "MIT",
+  "author": "David Moreira",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpxlify/atlure-ui.git",
+    "directory": "packages/tailwind-preset"
+  },
+  "main": "./generated/index.js",
+  "exports": {
+    ".": "./generated/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "generated",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "scripts": {
+    "build": "echo generated-by-tokens-package",
+    "typecheck": "echo no-typescript-sources",
+    "test": "echo covered-by-tokens-parity-tests"
+  }
+}

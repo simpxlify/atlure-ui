@@ -1,0 +1,75 @@
+/* atlure-generated-do-not-edit */
+const preset = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+    "background": "hsl(var(--background) / <alpha-value>)",
+    "foreground": "hsl(var(--foreground) / <alpha-value>)",
+    "card": "hsl(var(--card) / <alpha-value>)",
+    "card-foreground": "hsl(var(--card-foreground) / <alpha-value>)",
+    "popover": "hsl(var(--popover) / <alpha-value>)",
+    "popover-foreground": "hsl(var(--popover-foreground) / <alpha-value>)",
+    "primary": "hsl(var(--primary) / <alpha-value>)",
+    "primary-foreground": "hsl(var(--primary-foreground) / <alpha-value>)",
+    "secondary": "hsl(var(--secondary) / <alpha-value>)",
+    "secondary-foreground": "hsl(var(--secondary-foreground) / <alpha-value>)",
+    "muted": "hsl(var(--muted) / <alpha-value>)",
+    "muted-foreground": "hsl(var(--muted-foreground) / <alpha-value>)",
+    "accent": "hsl(var(--accent) / <alpha-value>)",
+    "accent-foreground": "hsl(var(--accent-foreground) / <alpha-value>)",
+    "destructive": "hsl(var(--destructive) / <alpha-value>)",
+    "destructive-foreground": "hsl(var(--destructive-foreground) / <alpha-value>)",
+    "border": "hsl(var(--border) / <alpha-value>)",
+    "input": "hsl(var(--input) / <alpha-value>)",
+    "input-background": "hsl(var(--input-background) / <alpha-value>)",
+    "ring": "hsl(var(--ring) / <alpha-value>)",
+    "chart-1": "hsl(var(--chart-1) / <alpha-value>)",
+    "chart-2": "hsl(var(--chart-2) / <alpha-value>)",
+    "chart-3": "hsl(var(--chart-3) / <alpha-value>)",
+    "chart-4": "hsl(var(--chart-4) / <alpha-value>)",
+    "chart-5": "hsl(var(--chart-5) / <alpha-value>)",
+      },
+      borderRadius: {
+    "sm": "0.25rem",
+    "md": "0.375rem",
+    "lg": "0.625rem",
+    "xl": "0.875rem",
+    "full": "9999px",
+      },
+      spacing: {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.25rem",
+    "xl": "1.5rem",
+    "2xl": "2rem",
+    "3xl": "2.5rem",
+      },
+      fontSize: {
+    "xs": ["0.75rem", { lineHeight: "1rem" }],
+    "sm": ["0.875rem", { lineHeight: "1.25rem" }],
+    "base": ["1rem", { lineHeight: "1.5rem" }],
+    "lg": ["1.125rem", { lineHeight: "1.75rem" }],
+    "xl": ["1.25rem", { lineHeight: "1.75rem" }],
+    "2xl": ["1.5rem", { lineHeight: "2rem" }],
+    "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
+      },
+      height: {
+    "control-sm": "2.25rem",
+    "control-md": "2.5rem",
+    "control-lg": "3rem",
+    "control-icon": "2.5rem",
+      },
+      minHeight: {
+    "control-sm": "2.25rem",
+    "control-md": "2.5rem",
+    "control-lg": "3rem",
+    "control-icon": "2.5rem",
+      },
+    },
+  },
+};
+
+module.exports = preset;
+module.exports.default = preset;
