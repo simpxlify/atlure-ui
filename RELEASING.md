@@ -222,3 +222,24 @@ this repo, which all three do.
 - **No publish step a human can run.** `pnpm release` exists as an npm script, but it is only
   ever invoked by `release.yml`; running it locally would fail on the missing `NPM_TOKEN`, and
   doing so anyway is the thing this document exists to prevent.
+
+## Why `@atlure/ui` is exempt from attw
+
+`scripts/verify-packaging.mjs` skips `@arethetypeswrong/cli` for `@atlure/ui` only. This is a
+deliberate, narrow exemption, not a suppressed failure.
+
+`@atlure/ui` ships **untranspiled TypeScript source**, because NativeWind's `className` support is a
+Babel-time JSX transform (`jsxImportSource: "nativewind"`). Precompiling the components would turn
+`className` into a silently dead prop and every component would render unstyled. The consumer's
+Metro/Babel pipeline must see the original source.
+
+attw evaluates whether types resolve under Node's own resolution algorithms. For this package it
+reports `bundler: 🟢` — the only mode Metro and Next actually use — while `node10` and `node16` fail,
+because Node cannot resolve a `.ts` entry point and never will. That is a property of the shipping
+strategy, not a defect, so the check is asking a question that does not apply here.
+
+Everything else still applies to this package: `publint --strict` runs, and the pack-manifest
+snapshot runs. The manifest currently pins 33 files and contains no stories or test files, which is
+the specific regression that shipped in the predecessor `@simpxlify/pawlii-ui@0.0.40`.
+
+If a future package also ships source, add it to `SOURCE_SHIPPED_PACKAGES` and record the reason here.

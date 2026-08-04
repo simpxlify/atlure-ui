@@ -57,6 +57,8 @@ function loadCommittedManifest() {
 const committedManifest = loadCommittedManifest();
 const packages = listPublishablePackages();
 const updatedManifest = {};
+const SOURCE_SHIPPED_PACKAGES = new Set(['@atlure/ui']);
+
 const failures = [];
 
 if (packages.length === 0) failures.push('no publishable workspace packages were found');
@@ -76,13 +78,17 @@ for (const { name, directory, manifest } of packages) {
       failures.push(`${name}: publint reported problems`);
     }
 
-    const excludedEntrypoints = collectAssetEntrypoints(manifest);
-    const attwArgs = ['exec', 'attw', '--profile', ATTW_PROFILE];
-    if (excludedEntrypoints.length > 0) attwArgs.push('--exclude-entrypoints', ...excludedEntrypoints);
-    try {
-      runPnpm([...attwArgs, '--', tarballPath]);
-    } catch {
-      failures.push(`${name}: @arethetypeswrong/cli reported problems`);
+    if (SOURCE_SHIPPED_PACKAGES.has(name)) {
+      console.log(`  attw skipped: ${name} ships untranspiled TypeScript for the NativeWind babel transform`);
+    } else {
+      const excludedEntrypoints = collectAssetEntrypoints(manifest);
+      const attwArgs = ['exec', 'attw', '--profile', ATTW_PROFILE];
+      if (excludedEntrypoints.length > 0) attwArgs.push('--exclude-entrypoints', ...excludedEntrypoints);
+      try {
+        runPnpm([...attwArgs, '--', tarballPath]);
+      } catch {
+        failures.push(`${name}: @arethetypeswrong/cli reported problems`);
+      }
     }
 
     if (isUpdateRun) {
