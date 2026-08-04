@@ -12,10 +12,12 @@ A ticket is **ready** when every ticket in its `blocked_by` is closed. Closed se
 
 > **Read the ticket's latest GitHub comment before starting anything.** The audit recorded, per ticket, exactly which acceptance criteria pass and which do not. Nothing in this repo set is as complete as it looks from the outside: 0 of 104 open tickets met all their acceptance criteria.
 
-### Two environment facts that gate a large share of the board
+### Three environment facts that gate a large share of the board
 
-1. **`atlure-api`'s schema has never executed.** No Docker, no psql, no hosted EU Supabase project. 17 migrations, 77 RLS policies and a PostGIS search RPC exist as *text only*. Every backend ticket, the whole auth/data seam in `atlure-paw`, and all realtime work are gated on this. Ticket 010 is closed but `atlure-api/README.md` says no EU project exists — see the flag on atlure-ui#13.
-2. **`atlure-paw` has never rendered on a device or simulator.** Ticket 061 (the NativeWind 4.2.6 / Expo 57 orange probe) is still the top unverified risk on the project, and it also needs `@atlure/ui` added as a dependency, which it currently is not.
+1. **`atlure-api`'s schema has never executed.** 17 migrations, 77 RLS policies and a PostGIS search RPC exist as *text only* — no migration has ever applied, no policy has ever denied a query, no PostGIS radius result has ever been checked. Every backend ticket, the auth/data seam in `atlure-paw`, and all realtime work depend on fixing this.
+   **But the fix is cheaper than it looks:** the hosted EU Supabase project *does* exist and is configured (verified in `atlure-api/.env`; `atlure-api/README.md:299` claiming otherwise is stale and should be corrected). There is no Docker on this machine, but `supabase link` + `supabase db push` needs none. Use a throwaway second EU project as the scratch target — and do **not** apply `supabase/ci/bootstrap.sql` against a real Supabase project, since it only exists to fake `auth.users`/`storage.objects` on a bare Postgres. See atlure-api#1.
+2. **`atlure-paw` has never rendered on a device or simulator.** Ticket 061 (the NativeWind 4.2.6 / Expo 57 orange probe) is still the top unverified risk on the project. NativeWind's `className` is a Babel-time transform: when it fails, the prop is silently dead, everything renders unstyled, and typecheck, bundle and unit tests all still pass. 061 also needs `@atlure/ui` added as a dependency of `atlure-paw`, which it currently is not.
+3. **No ESLint exists anywhere in `atlure-ui`**, and there is no root `lint` script. Five ds-native tickets (027–033) carry a "`pnpm lint` exits 0" criterion that cannot even be run, and ticket 016's raw-hex ban has nothing to hook into. Landing 016 properly unblocks all of them.
 
 ---
 
@@ -178,4 +180,40 @@ Tickets that, once closed, unblock the most other tickets. Direct dependents onl
 | 018 | Scaffold @atlure/ui as a source-shipping package | atlure-ui | 5 |
 | 028 | Button and IconButton | atlure-ui | 5 |
 | 048 | Schema: sitter profiles / services and availability | atlure-api | 5 |
+
+---
+
+## Tickets that no agent can close
+
+These need a device, a store console, a paid account, or a legal identity. See `.ai/shared/atlure/manual-setup.md`.
+
+| Ticket | Why | Issue |
+|---|---|---|
+| 011 | App Store Connect + Google Play reservation. Deferred by decision — needs the Apple Developer Program and Play Console paid accounts. Not blocking: the identifiers are already committed and EAS is linked. | [atlure-ui#14](https://github.com/simpxlify/atlure-ui/issues/14) |
+| 061 | Physical iOS **and** Android release builds with sampled pixels. A simulator does not discharge it. | [atlure-paw#33](https://github.com/simpxlify/atlure-paw/issues/33) |
+| 105 | End-to-end run on a real device against a seeded live database. | [atlure-paw#38](https://github.com/simpxlify/atlure-paw/issues/38) |
+| 109 | Brand design work. Current assets are machine-generated placeholders — correct geometry, not a brand. | [atlure-ui#54](https://github.com/simpxlify/atlure-ui/issues/54) |
+| 111 | Store credentials, real EAS builds, physical devices. No build has ever been produced. | [atlure-paw#40](https://github.com/simpxlify/atlure-paw/issues/40) |
+| 007 | Whether the old `pawlii` EAS project still exists needs the Expo dashboard; `eas project:list` does not exist in this CLI. | [atlure-ui#10](https://github.com/simpxlify/atlure-ui/issues/10) |
+| 113 | Requires cited professional legal advice. | [atlure-ui#50](https://github.com/simpxlify/atlure-ui/issues/50) |
+| 107 (partly) | VoiceOver/TalkBack passes on physical devices. | [atlure-ui#53](https://github.com/simpxlify/atlure-ui/issues/53) |
+| 110 (partly) | Cold-start timing on a reference Android device. The web Lighthouse half is actionable now. | [atlure-ui#55](https://github.com/simpxlify/atlure-ui/issues/55) |
+| 103 (partly) | Needs the real Apple Team ID (011) and the Play App Signing SHA-256 (111). Both `.well-known` files currently ship placeholder values, so no universal link resolves. | [atlure-web#9](https://github.com/simpxlify/atlure-web/issues/9) |
+
+---
+
+## Defects found during the audit, outside any ticket's scope
+
+Each is real, reproducible, and worth fixing independently of ticket bookkeeping.
+
+1. **`@atlure/ui-web` `Button` never sets `type`**, so it defaults to `submit` — any Button inside a form submits it. `packages/ui-web/src/components/button.tsx`. (atlure-ui#44)
+2. **The web Accordion drops collapsed answer text from the DOM**, and `accordion.test.tsx:30` asserts that behaviour. This breaks the FAQ SEO requirement that tickets 098 and 100 depend on. (atlure-ui#45)
+3. **Ticket 016's checksum guard is a no-op against hand-edits**: the test script regenerates the artifact before comparing, so tampering with `packages/tokens/generated/theme.css` still exits 0. Demonstrated during the audit. (atlure-ui#19)
+4. **`atlure-paw`'s `app.config.ts` has `updates.url` pointing at `PLACEHOLDER_EAS_PROJECT_ID`** while `extra.eas.projectId` is real — OTA updates would resolve nowhere. (atlure-paw#30)
+5. **`atlure-web/.github/workflows/ci.yml` is stale**: it still clones `atlure-ui` as a sibling from the `file:`-dependency era, which no longer describes how the repo builds. (atlure-web#1)
+6. **`robots.ts` in `atlure-web` always allows crawling** with no preview-deployment disallow, so Vercel previews are indexable today. (atlure-web#7)
+7. **`atlure-web` root-layout description promises users can "pay securely"**, which the no-payments v1 model does not do. (atlure-web#2)
+8. **`atlure-api`'s pet-photo storage policy checks folder ownership, not pet ownership**, so a user can upload against a pet they do not own. (atlure-api#8)
+9. **`atlure-api` never logs service-role client usage** despite ticket 056 requiring it — that client bypasses RLS entirely. (atlure-api#11)
+10. **`atlure-api/README.md:299` says the EU Supabase project does not exist.** It does. Stale docs sent this audit down the wrong path once already. (atlure-api#1)
 
