@@ -23,9 +23,9 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - run: pnpm -r typecheck
-
       - run: pnpm -r build
+
+      - run: pnpm -r typecheck
 
       - run: pnpm -r test
 
@@ -42,4 +42,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: "true"

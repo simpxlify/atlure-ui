@@ -44,7 +44,6 @@ log(`project: ${project.title} (${project.id})`);
 
 const REQUIRED_FIELDS = [
   ["Epic", "decommission,ds-foundations,ds-native,ds-web,backend,paw-shell,paw-screens,web-marketing,quality,monetization"],
-  ["Repo", "atlure-ui,atlure-paw,atlure-web,atlure-api,ops"],
   ["Priority", "P0,P1,P2,P3"],
   ["Size", "XS,S,M,L,XL"],
   ["Serialize", "Yes,No"],
@@ -194,7 +193,6 @@ for (const ticket of tickets) {
 
   const assignments = [
     ["Epic", ticket.epic],
-    ["Repo", isOps ? "ops" : ticket.repo],
     ["Priority", ticket.priority],
     ["Size", ticket.size],
     ["Serialize", ticket.serialize],
