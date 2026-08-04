@@ -10,7 +10,7 @@ const meta = {
     placeholder: 'you@example.com',
   },
   argTypes: {
-    controlSize: { control: 'select', options: ['sm', 'md', 'lg'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
   },
   decorators: [
     (Story) => (
@@ -57,9 +57,9 @@ export const ReadOnly: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <Stack gap="md">
-      <Input {...args} controlSize="sm" label="Small" />
-      <Input {...args} controlSize="md" label="Medium" />
-      <Input {...args} controlSize="lg" label="Large" />
+      <Input {...args} size="sm" label="Small" />
+      <Input {...args} size="md" label="Medium" />
+      <Input {...args} size="lg" label="Large" />
     </Stack>
   ),
 };

@@ -10,3 +10,4 @@ storybook-static/
 .turbo/
 .build/
 PROGRESS.md
+.cache/

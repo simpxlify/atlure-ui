@@ -102,5 +102,23 @@
     "src/variants/skeleton-variants.ts",
     "src/variants/switch-variants.ts",
     "src/variants/text-variants.ts"
+  ],
+  "@atlure/ui-web": [
+    "README.md",
+    "dist/chunk-OBOQO264.js",
+    "dist/chunk-OBOQO264.js.map",
+    "dist/index.cjs",
+    "dist/index.cjs.map",
+    "dist/index.d.cts",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/index.js.map",
+    "dist/variants/index.cjs",
+    "dist/variants/index.cjs.map",
+    "dist/variants/index.d.cts",
+    "dist/variants/index.d.ts",
+    "dist/variants/index.js",
+    "dist/variants/index.js.map",
+    "package.json"
   ]
 }

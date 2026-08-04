@@ -107,3 +107,41 @@ pnpm --filter storybook-web storybook
 ## License
 
 MIT © David Moreira
+
+## Cross-platform API parity
+
+`@atlure/ui-web` and `@atlure/ui` deliberately **do not share cva recipes**. An earlier plan assumed
+they could, and that was wrong on the technical merits. Three platform differences make shared class
+strings impossible:
+
+- React Native has no CSS pseudo-classes, so `hover:`, `focus-visible:` and `disabled:` have no
+  native equivalent and must be modelled as explicit variant props.
+- React Native has **no text style inheritance**, so native needs a separate `buttonLabelVariants`
+  where web simply puts `text-primary-foreground` on the button and lets children inherit.
+- `inline-flex` and `transition-colors` have no meaning in React Native's layout and animation model.
+
+What *is* shared and enforced is the **API surface**. `src/variants/parity.test.ts` parses both
+platforms' recipe sources and fails if the variant option names drift on any axis both platforms
+expose. That keeps `variant="secondary"` and `size="md"` meaning the same thing everywhere, which is
+what consumers actually depend on.
+
+### Known divergences, deliberately allow-listed
+
+These are recorded in the test so they cannot grow silently. Each is either platform-inherent or a
+tracked gap:
+
+| Component | Divergence | Why |
+|---|---|---|
+| button | native-only `isDisabled` | RN has no `:disabled` selector; web uses the pseudo-class |
+| button | web-only `size: icon` | **Gap.** Native should gain an icon size; mobile has icon buttons too |
+| badge | native-only `size` | **Gap.** Web should gain the size axis |
+| card | web-only `padding` | **Gap.** Native should gain the padding axis |
+| input | native-only `isDisabled`, `isMultiline` | RN has no `:disabled`; multiline is `TextInput` vs `<textarea>` |
+
+Two naming inconsistencies were **fixed** rather than allow-listed, because a single concept under two
+names is exactly the drift that makes a two-platform system painful: web's `controlSize` became `size`
+to match native, and web's `isInteractive` became `isPressable`. The `Input` component already omits
+the native HTML `size` attribute, so the rename is safe.
+
+The rows marked **Gap** are real work, not accepted design. Closing one means adding the axis to the
+other platform and removing its entry from the allow-list.

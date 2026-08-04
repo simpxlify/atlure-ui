@@ -72,7 +72,7 @@ export const Variants: Story = {
 
 export const Interactive: Story = {
   render: () => (
-    <Card isInteractive className="max-w-sm">
+    <Card isPressable className="max-w-sm">
       <CardHeader>
         <CardTitle asChild>
           <h2>

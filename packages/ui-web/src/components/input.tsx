@@ -17,7 +17,7 @@ export interface InputProps
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, controlSize, label, hint, errorMessage, id, ...props },
+  { className, size, label, hint, errorMessage, id, ...props },
   ref,
 ) {
   const generatedId = useId();
@@ -42,7 +42,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         id={inputId}
         aria-invalid={hasError || undefined}
         aria-describedby={describedBy || undefined}
-        className={cn(inputVariants({ controlSize, isInvalid: hasError }), className)}
+        className={cn(inputVariants({ size, isInvalid: hasError }), className)}
         {...props}
       />
       {hasVisibleHint && (

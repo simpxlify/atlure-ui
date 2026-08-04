@@ -14,13 +14,13 @@ import {
 export interface CardProps extends HTMLAttributes<HTMLDivElement>, CardVariantProps {}
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { className, variant, padding, isInteractive, ...props },
+  { className, variant, padding, isPressable, ...props },
   ref,
 ) {
   return (
     <div
       ref={ref}
-      className={cn(cardVariants({ variant, padding, isInteractive }), className)}
+      className={cn(cardVariants({ variant, padding, isPressable }), className)}
       {...props}
     />
   );

@@ -13,7 +13,7 @@ export const cardVariants = cva('flex flex-col rounded-lg bg-card text-card-fore
       md: 'p-lg',
       lg: 'p-xl',
     },
-    isInteractive: {
+    isPressable: {
       true: 'transition-colors hover:bg-accent/10',
       false: '',
     },
@@ -21,7 +21,7 @@ export const cardVariants = cva('flex flex-col rounded-lg bg-card text-card-fore
   defaultVariants: {
     variant: 'elevated',
     padding: 'md',
-    isInteractive: false,
+    isPressable: false,
   },
 });
 
