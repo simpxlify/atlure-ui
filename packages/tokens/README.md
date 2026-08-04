@@ -6,9 +6,11 @@ The single source of truth for Atlure's visual language. Every color, radius, sp
 
 Two previous attempts at an Atlure design system (`pawlii-ui` and `pawlii-ui2`) both failed the same way: tokens were duplicated by hand across a JS theme object, a CSS variable file and a Tailwind config, and the copies drifted. This package makes that impossible by generating every downstream artifact from one file, and by failing the build if a generated file is edited by hand.
 
-## One source, five generated artifacts
+## One source, four generated artifacts plus two compiled modules
 
-`src/tokens.ts` → `scripts/build-tokens.ts` → 
+`src/tokens.ts` is the single source. Four files are emitted by `scripts/build-tokens.ts`; the JS theme object and `NAV_THEME` are hand-written modules that import from it and are compiled by `tsc`. The distinction matters: only the four emitted files are covered by the checksum guard.
+
+
 
 | Artifact | Consumer |
 |---|---|
