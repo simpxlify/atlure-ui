@@ -189,10 +189,17 @@ uses Node's built-in test runner. Allowing the build script does not change that
 
 | File | Runs on | Does |
 |---|---|---|
-| `ci.yml` | PRs, `main` | `verify`: typecheck, test, build, `git diff --exit-code`. `packaging`: build, then `pnpm verify:packaging` |
+| `ci.yml` | PRs, `main` | `verify`: typecheck, build, test, `git diff --exit-code`. `packaging`: build, then `pnpm verify:packaging` |
 | `changeset-status.yml` | PRs into `main` | fails a PR that changes a package without a changeset. Skipped on the `changeset-release/main` branch, which deletes changesets by design |
 | `secret-scan.yml` | PRs, `main` | gitleaks over full history |
 | `release.yml` | push to `main` | the only publisher: version PR, npm publish with provenance, git tags, GitHub releases |
+
+**Build runs before test.** `@atlure/types`' test imports `dist/index.js`, so on a clean
+checkout the previous `test` → `build` ordering failed with `ERR_MODULE_NOT_FOUND` — this was
+already red on `main` and had nothing to do with the release work. Swapping the two steps fixes
+it here. The cleaner fix belongs to that package: `@atlure/tokens`' test script builds what it
+needs first (`pnpm run generate && node --test ...`) and `@atlure/types`' should do the same, at
+which point CI stops depending on step order at all.
 
 They share `.github/actions/setup`, which installs pnpm from the `packageManager` field, Node
 from `.nvmrc`, and runs `pnpm install --frozen-lockfile`. Pinning pnpm in one place means the

@@ -25,9 +25,9 @@ jobs:
 
       - run: pnpm -r typecheck
 
-      - run: pnpm -r test
-
       - run: pnpm -r build
+
+      - run: pnpm -r test
 
       - name: publint, attw and the pack-manifest snapshot for every publishable package
         run: pnpm verify:packaging
