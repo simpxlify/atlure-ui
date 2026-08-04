@@ -22,6 +22,8 @@ export function Input({
   return (
     <TextInput
       accessibilityState={{ disabled: isDisabled }}
+      aria-disabled={isDisabled}
+      aria-invalid={isInvalid}
       editable={!isDisabled}
       multiline={isMultiline}
       hitSlop={touchTargetHitSlop(size)}

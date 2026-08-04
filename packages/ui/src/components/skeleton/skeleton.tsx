@@ -25,6 +25,7 @@ export function Skeleton({
       accessibilityRole="progressbar"
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ busy: true }}
+      aria-busy
       className={cn(skeletonVariants({ shape }), className)}
       style={[{ opacity }, style]}
       {...viewProps}

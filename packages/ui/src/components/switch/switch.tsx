@@ -27,6 +27,8 @@ export function Switch({
       accessibilityRole="switch"
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ checked: isChecked, disabled: isDisabled }}
+      aria-checked={isChecked}
+      aria-disabled={isDisabled}
       disabled={isDisabled}
       hitSlop={touchTargetHitSlop("md")}
       onPress={() => onValueChange(!isChecked)}

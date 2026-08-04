@@ -28,6 +28,8 @@ export function Button({
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityState={{ disabled: isPressBlocked, busy: isLoading }}
+      aria-disabled={isPressBlocked}
+      aria-busy={isLoading}
       disabled={isPressBlocked}
       hitSlop={touchTargetHitSlop(size)}
       className={cn(

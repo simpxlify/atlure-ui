@@ -33,6 +33,7 @@ export function Card({
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       accessibilityState={{ disabled: isDisabled }}
+      aria-disabled={isDisabled}
       disabled={isDisabled}
       onPress={onPress}
       className={cardClassName}

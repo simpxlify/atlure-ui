@@ -1,7 +1,6 @@
 /* atlure-generated-barrel-do-not-edit */
 
 export * from "./components/avatar/avatar";
-export * from "./components/avatar/utils";
 export * from "./components/badge/badge";
 export * from "./components/button/button";
 export * from "./components/button/types";
@@ -11,7 +10,6 @@ export * from "./components/checkbox/checkbox";
 export * from "./components/input/input";
 export * from "./components/label/label";
 export * from "./components/separator/separator";
-export * from "./components/skeleton/hooks/use-pulse-opacity";
 export * from "./components/skeleton/skeleton";
 export * from "./components/switch/switch";
 export * from "./components/text/text";
