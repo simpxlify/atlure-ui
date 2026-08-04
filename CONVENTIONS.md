@@ -167,12 +167,13 @@ A comment is justified only for a genuinely counterintuitive *why*: a lint suppr
 
 ## Pull requests
 
-Always **draft**, with `@copilot` as reviewer:
+Always open as a **draft**:
 
 ```bash
 gh pr create --draft --title "..." --body "..."
-gh pr edit --add-reviewer @copilot
 ```
+
+Copilot code review is **not** enabled on these repos, so do not add `@copilot` as a reviewer. The command exits 0 and prints the PR URL while adding nobody, because reviews can only be requested from collaborators. If Copilot review is enabled later, add the step back.
 
 Never mark ready for review without explicit confirmation.
 
