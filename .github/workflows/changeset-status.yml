@@ -1,0 +1,25 @@
+name: changeset-status
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  changeset:
+    if: github.head_ref != 'changeset-release/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup
+
+      - name: fetch the base branch so changeset status can diff against it
+        run: git fetch origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+
+      - name: every change under packages/ needs a changeset
+        run: pnpm changeset status --since=origin/${{ github.base_ref }}

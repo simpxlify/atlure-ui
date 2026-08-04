@@ -9,3 +9,4 @@ coverage/
 storybook-static/
 .turbo/
 .build/
+PROGRESS.md
