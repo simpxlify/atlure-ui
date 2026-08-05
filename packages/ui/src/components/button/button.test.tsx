@@ -50,3 +50,14 @@ describe("When a button carries a separate accessibility label", () => {
     expect(screen.getByRole("button", { name: /book a sitter for luna/i })).toBeTruthy();
   });
 });
+
+describe("When a button is rendered in any variant", () => {
+  it("is exposed as a button on every one", () => {
+    for (const variant of ["primary", "secondary", "outline", "ghost", "destructive", "link"] as const) {
+      const { unmount } = render(<Button label={`Book ${variant}`} variant={variant} />);
+
+      expect(screen.getByRole("button", { name: new RegExp(`book ${variant}`, "i") }), variant).toBeTruthy();
+      unmount();
+    }
+  });
+});

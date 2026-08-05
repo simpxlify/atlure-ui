@@ -88,9 +88,7 @@ const PLATFORM_ONLY_AXES: Record<string, { webOnly: string[]; nativeOnly: string
   input: { webOnly: [], nativeOnly: ['isDisabled', 'isMultiline'] },
 };
 
-const OPTION_DRIFT_ALLOWED: Record<string, Record<string, { web: string[]; native: string[] }>> = {
-  button: { size: { web: ['icon', 'lg', 'md', 'sm'], native: ['lg', 'md', 'sm'] } },
-};
+const OPTION_DRIFT_ALLOWED: Record<string, Record<string, { web: string[]; native: string[] }>> = {};
 
 describe('When a component exists on both web and native', () => {
   it('parses a non-empty variant axis set from both platforms', () => {

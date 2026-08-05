@@ -69,3 +69,31 @@ describe('When a Button renders asChild', () => {
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 });
+
+describe('When a Button sits inside a form', () => {
+  it('does not submit the form, because it defaults to type="button"', async () => {
+    const onSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
+    render(
+      <form onSubmit={onSubmit}>
+        <Button>Add a pet</Button>
+      </form>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /add a pet/i }));
+
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('still submits when the caller explicitly asks for a submit button', async () => {
+    const onSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
+    render(
+      <form onSubmit={onSubmit}>
+        <Button type="submit">Save</Button>
+      </form>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: /save/i }));
+
+    expect(onSubmit).toHaveBeenCalled();
+  });
+});

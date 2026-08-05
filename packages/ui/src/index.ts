@@ -7,6 +7,7 @@ export * from "./components/button/types";
 export * from "./components/card/card";
 export * from "./components/card/card-section";
 export * from "./components/checkbox/checkbox";
+export * from "./components/icon-button/icon-button";
 export * from "./components/input/input";
 export * from "./components/label/label";
 export * from "./components/separator/separator";

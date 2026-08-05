@@ -4,46 +4,37 @@ import { cn } from "../../lib/cn";
 import { touchTargetHitSlop } from "../../lib/touch-target";
 import { buttonLabelVariants, buttonVariants } from "../../variants/button-variants";
 import { TextClassProvider } from "../text/text-class-context";
-import { Text } from "../text/text";
-import type { ButtonProps } from "./types";
+import type { IconButtonProps } from "../button/types";
 
-export function Button({
-  label,
+export function IconButton({
+  icon,
+  accessibilityLabel,
   variant = "primary",
-  size = "md",
   isFullWidth = false,
   isDisabled = false,
   isLoading = false,
-  leadingIcon,
-  trailingIcon,
-  accessibilityLabel,
   className,
-  labelClassName,
   ...pressableProps
-}: ButtonProps) {
+}: IconButtonProps) {
   const isPressBlocked = isDisabled || isLoading;
-  const hasAdornment = Boolean(leadingIcon ?? trailingIcon) || isLoading;
 
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={accessibilityLabel ?? label}
+      accessibilityLabel={accessibilityLabel}
       accessibilityState={{ disabled: isPressBlocked, busy: isLoading }}
       aria-disabled={isPressBlocked}
       aria-busy={isLoading}
       disabled={isPressBlocked}
-      hitSlop={touchTargetHitSlop(size)}
+      hitSlop={touchTargetHitSlop("icon")}
       className={cn(
-        buttonVariants({ variant, size, isFullWidth, isDisabled: isPressBlocked }),
-        hasAdornment && "gap-sm",
+        buttonVariants({ variant, size: "icon", isFullWidth, isDisabled: isPressBlocked }),
         className,
       )}
       {...pressableProps}
     >
-      <TextClassProvider className={buttonLabelVariants({ variant, size })}>
-        {isLoading ? <ActivityIndicator size="small" /> : leadingIcon}
-        <Text className={labelClassName}>{label}</Text>
-        {!isLoading && trailingIcon}
+      <TextClassProvider className={buttonLabelVariants({ variant, size: "icon" })}>
+        {isLoading ? <ActivityIndicator size="small" /> : icon}
       </TextClassProvider>
     </Pressable>
   );
