@@ -42,7 +42,7 @@ export function SitterCard({ sitter, onOpen, openLabel }) {
   return (
     <Card onPress={onOpen} accessibilityLabel={openLabel}>
       <CardContent className="flex-row items-center gap-md">
-        <Avatar name={sitter.displayName} uri={sitter.avatarUrl} />
+        <Avatar name={sitter.displayName} src={sitter.avatarUrl} presence="online" />
         <Text variant="title">{sitter.displayName}</Text>
       </CardContent>
     </Card>
@@ -51,7 +51,7 @@ export function SitterCard({ sitter, onOpen, openLabel }) {
 ```
 
 Components: `Text`, `Button`, `Card` (`CardHeader`, `CardContent`, `CardFooter`), `Input`, `Label`,
-`Badge`, `Avatar`, `Separator`, `Skeleton`, `Switch`, `Checkbox`, `Sheet`, `Select` (`SelectItem`),
+`Badge`, `Avatar` (`AvatarGroup`), `Separator`, `Skeleton`, `Switch`, `Checkbox`, `Sheet`, `Select` (`SelectItem`),
 `Picker`, `Dialog`, `AlertDialog`, `Toast`, `MoneyLabel`, `DistanceLabel`, `DurationLabel`, `DateLabel`, `DateRangeLabel`.
 
 Overlays queue through a host, so the app root mounts it once, above the navigator:

@@ -2,6 +2,7 @@
 
 export * from "./components/alert-dialog/alert-dialog";
 export * from "./components/avatar/avatar";
+export * from "./components/avatar/avatar-group";
 export * from "./components/badge/badge";
 export * from "./components/badge/urgency-badge";
 export * from "./components/button/button";
