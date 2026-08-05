@@ -6,9 +6,12 @@ export const badgeVariants = cva(
     variants: {
       variant: {
         primary: 'bg-primary text-primary-foreground',
+        default: 'bg-primary text-primary-foreground',
         secondary: 'bg-secondary text-secondary-foreground',
         muted: 'bg-muted text-muted-foreground',
         outline: 'border border-border bg-transparent text-foreground',
+        success: 'bg-success text-success-foreground',
+        warning: 'bg-warning text-warning-foreground',
         destructive: 'bg-destructive text-destructive-foreground',
       },
     },
