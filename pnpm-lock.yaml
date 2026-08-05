@@ -169,6 +169,9 @@ importers:
       '@atlure/tokens':
         specifier: workspace:*
         version: link:../tokens
+      '@atlure/types':
+        specifier: workspace:*
+        version: link:../types
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1

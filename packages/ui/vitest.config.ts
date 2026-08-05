@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 
 const tokensSourceEntry = fileURLToPath(new URL("../tokens/src/index.ts", import.meta.url));
+const typesSourceEntry = fileURLToPath(new URL("../types/src/index.ts", import.meta.url));
 
 export default defineConfig({
   esbuild: {
@@ -13,6 +14,7 @@ export default defineConfig({
     alias: [
       { find: /^react-native$/, replacement: "react-native-web" },
       { find: /^@atlure\/tokens$/, replacement: tokensSourceEntry },
+      { find: /^@atlure\/types$/, replacement: typesSourceEntry },
     ],
   },
   test: {

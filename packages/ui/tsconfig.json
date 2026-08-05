@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "paths": {
-      "@atlure/tokens": ["../tokens/src/index.ts"]
+      "@atlure/tokens": ["../tokens/src/index.ts"],
+      "@atlure/types": ["../types/src/index.ts"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "nativewind",
