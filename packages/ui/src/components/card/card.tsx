@@ -1,3 +1,4 @@
+import type { ComponentRef, Ref } from "react";
 import { Pressable, View, type ViewProps } from "react-native";
 
 import { cn } from "../../lib/cn";
@@ -7,6 +8,7 @@ export interface CardProps extends ViewProps, Pick<CardVariantProps, "variant"> 
   onPress?: () => void;
   accessibilityLabel?: string;
   isDisabled?: boolean;
+  ref?: Ref<ComponentRef<typeof View>>;
 }
 
 export function Card({

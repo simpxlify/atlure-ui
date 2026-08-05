@@ -1,3 +1,4 @@
+import type { ComponentRef, Ref } from "react";
 import { View, type ViewProps } from "react-native";
 
 import { cn } from "../../lib/cn";
@@ -6,6 +7,7 @@ import { separatorVariants, type SeparatorVariantProps } from "../../variants/se
 export interface SeparatorProps extends Omit<ViewProps, "children"> {
   orientation?: NonNullable<SeparatorVariantProps["orientation"]>;
   spacing?: NonNullable<SeparatorVariantProps["spacing"]>;
+  ref?: Ref<ComponentRef<typeof View>>;
 }
 
 export function Separator({
