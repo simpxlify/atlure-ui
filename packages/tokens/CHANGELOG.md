@@ -1,5 +1,13 @@
 # @atlure/tokens
 
+## 0.3.0
+
+### Patch Changes
+
+- [#60](https://github.com/simpxlify/atlure-ui/pull/60) [`a8339df`](https://github.com/simpxlify/atlure-ui/commit/a8339df13489cdf634962830c51652000178f80c) Thanks [@simpxlify](https://github.com/simpxlify)! - Make both packages resolvable by non-ESM resolvers. Their root export declared only `types` and `import`, so anything that did not match the `import` condition failed outright with `ERR_PACKAGE_PATH_NOT_EXPORTED` — jest, postcss configs, and any `*.config.js`. Adding a `default` condition alongside `import` fixes it without changing what ESM consumers resolve to.
+
+- [#59](https://github.com/simpxlify/atlure-ui/pull/59) [`d68ac75`](https://github.com/simpxlify/atlure-ui/commit/d68ac75461513f09ffd90931990deabee6244f32) Thanks [@simpxlify](https://github.com/simpxlify)! - Make the generated-artifact checksum guard actually guard. `pnpm --filter @atlure/tokens test` ran `generate` first, which rewrote every artifact **and** `checksum.json` before the comparison, so a hand-edit was silently regenerated away and the test could never fail. It now compiles the test sources only and compares the committed artifacts against the committed checksum.
+
 ## 0.2.0
 
 ### Minor Changes
