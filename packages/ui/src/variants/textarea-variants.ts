@@ -3,10 +3,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 export const textareaVariants = cva("", {
   variants: {
     rows: {
-      2: "min-h-16",
-      3: "min-h-24",
-      4: "min-h-28",
-      6: "min-h-40",
+      2: "min-h-textarea-sm",
+      3: "min-h-textarea-md",
+      4: "min-h-textarea-lg",
+      6: "min-h-textarea-xl",
     },
   },
   defaultVariants: {
