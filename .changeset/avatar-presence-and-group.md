@@ -16,5 +16,6 @@ Accessibility labels default to the avatar's `name` plus the presence variant na
 English prose, and `presenceAccessibilityLabel`, `loadingAccessibilityLabel` and
 `overflowAccessibilityLabel` let an app localize them.
 
-The image prop is renamed from `uri` to `src`. This is a breaking rename with no downstream
-consumers at the time of the change.
+`src` is added as the image prop and `uri` is retained as an alias, so this is additive rather than a
+rename. Both are accepted and `src` wins if both are set. Dropping `uri` is owed before 1.0 and is
+tracked in issue #73.

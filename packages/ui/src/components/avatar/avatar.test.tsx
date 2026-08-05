@@ -117,6 +117,44 @@ describe("When an avatar image fails to load", () => {
   });
 });
 
+describe("When an avatar is given the legacy uri prop", () => {
+  it("still renders the image", () => {
+    render(<Avatar name="Ana Pereira" uri="https://atlure.test/ana.jpg" />);
+
+    expect(screen.getByAltText("Ana Pereira")).toBeTruthy();
+    expect(screen.queryByText("AP")).toBeNull();
+  });
+
+  it("prefers src when both are given", () => {
+    render(
+      <Avatar
+        name="Ana Pereira"
+        src="https://atlure.test/from-src.jpg"
+        uri="https://atlure.test/from-uri.jpg"
+      />,
+    );
+
+    expect(lastImageLoad().src).toBe("https://atlure.test/from-src.jpg");
+  });
+
+  it("keys the failure fallback to the uri that was actually used", () => {
+    render(<Avatar name="Ana Pereira" uri="https://atlure.test/broken.jpg" />);
+
+    act(() => {
+      lastImageLoad().onerror?.();
+    });
+
+    expect(screen.queryByAltText("Ana Pereira")).toBeNull();
+    expect(screen.getByText("AP")).toBeTruthy();
+  });
+
+  it("falls back to the initials when both src and uri are null", () => {
+    render(<Avatar name="Ana Pereira" src={null} uri={null} />);
+
+    expect(screen.getByText("AP")).toBeTruthy();
+  });
+});
+
 describe("When an avatar declares a presence", () => {
   it("exposes an online dot to screen readers", () => {
     render(<Avatar name="Ana Pereira" presence="online" />);

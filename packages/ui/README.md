@@ -67,6 +67,9 @@ Overlays queue through a host, so the app root mounts it once, above the navigat
 `Dialog`, `AlertDialog` and `Toast` throw a named error if that host is missing, rather than
 rendering nothing and leaving you to guess why.
 
+`Avatar` accepts the image as either `src` or the older `uri`; `src` wins when both are set. `uri` is
+kept only so 0.3.0 consumers do not break, and goes away before 1.0.
+
 Every user-facing string is a prop. This package contains no display copy, so i18n stays in the app.
 The one exception is `MoneyLabel`'s `per` suffix, which renders the English words `per hour`, `per
 night` or `per walk`; a message catalogue is out of scope for v1, so this is the single string that

@@ -18,6 +18,7 @@ export type AvatarPresence = "online" | "offline" | "none";
 export interface AvatarProps extends ViewProps {
   name: string;
   src?: string | null;
+  uri?: string | null;
   size?: NonNullable<AvatarVariantProps["size"]>;
   shape?: NonNullable<AvatarVariantProps["shape"]>;
   presence?: AvatarPresence;
@@ -29,6 +30,7 @@ export interface AvatarProps extends ViewProps {
 export function Avatar({
   name,
   src = null,
+  uri = null,
   size = "md",
   shape = "circle",
   presence = "none",
@@ -41,7 +43,8 @@ export function Avatar({
   const [failedUri, setFailedUri] = useState<string | null>(null);
   const [loadedUri, setLoadedUri] = useState<string | null>(null);
 
-  const imageUri = src && src !== failedUri ? src : null;
+  const requestedUri = src ?? uri;
+  const imageUri = requestedUri && requestedUri !== failedUri ? requestedUri : null;
   const isLoading = imageUri !== null && imageUri !== loadedUri;
 
   return (
