@@ -16,6 +16,12 @@ export const palette = {
   slate900: "#0f172a",
   red500: "#ef4444",
   red600: "#dc2626",
+  green500: "#22c55e",
+  green600: "#16a34a",
+  green950: "#052e16",
+  yellow400: "#facc15",
+  amber500: "#f59e0b",
+  amber950: "#412006",
   white: "#ffffff",
 } as const;
 
@@ -36,6 +42,10 @@ export type SemanticToken =
   | "accentForeground"
   | "destructive"
   | "destructiveForeground"
+  | "success"
+  | "successForeground"
+  | "warning"
+  | "warningForeground"
   | "border"
   | "input"
   | "inputBackground"
@@ -66,6 +76,10 @@ export const semantic: { light: SemanticScale; dark: SemanticScale } = {
     accentForeground: palette.navy800,
     destructive: palette.red600,
     destructiveForeground: palette.white,
+    success: palette.green600,
+    successForeground: palette.white,
+    warning: palette.amber500,
+    warningForeground: palette.amber950,
     border: palette.orange600,
     input: palette.orange600,
     inputBackground: palette.white,
@@ -93,6 +107,10 @@ export const semantic: { light: SemanticScale; dark: SemanticScale } = {
     accentForeground: palette.slate50,
     destructive: palette.red500,
     destructiveForeground: palette.slate50,
+    success: palette.green500,
+    successForeground: palette.green950,
+    warning: palette.yellow400,
+    warningForeground: palette.amber950,
     border: palette.slate700,
     input: palette.slate700,
     inputBackground: palette.slate800,
