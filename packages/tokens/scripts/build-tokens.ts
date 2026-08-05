@@ -11,6 +11,7 @@ import {
   radius,
   semantic,
   spacing,
+  textareaHeight,
   type SemanticScale,
 } from "../src/tokens.js";
 
@@ -106,9 +107,12 @@ function buildTailwindPreset(): string {
     })
     .join("\n");
 
-  const heightEntries = Object.entries(controlHeight)
-    .map(([key, value]) => `    "control-${key}": "${value / 16}rem",`)
-    .join("\n");
+  const heightEntries = [
+    ...Object.entries(controlHeight).map(([key, value]) => `    "control-${key}": "${value / 16}rem",`),
+    ...Object.entries(textareaHeight).map(
+      ([key, value]) => `    "textarea-${key}": "${value / 16}rem",`,
+    ),
+  ].join("\n");
 
   return [
     `const preset = {`,

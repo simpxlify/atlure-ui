@@ -150,6 +150,13 @@ export const controlHeight = {
   icon: 40,
 } as const;
 
+export const textareaHeight = {
+  sm: 64,
+  md: 96,
+  lg: 112,
+  xl: 160,
+} as const;
+
 export const fontWeight = {
   normal: "400",
   medium: "500",

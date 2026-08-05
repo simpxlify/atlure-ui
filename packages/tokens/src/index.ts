@@ -6,6 +6,7 @@ export {
   fontSize,
   lineHeight,
   controlHeight,
+  textareaHeight,
   fontWeight,
 } from "./tokens.js";
 export type { SemanticToken, SemanticScale } from "./tokens.js";

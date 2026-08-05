@@ -9,6 +9,7 @@ import { contrastRatio, hexToHsl, hslToHex, kebabCase, toCssChannels } from "../
 import { NAV_THEME } from "../src/navigation.js";
 import {
   controlHeight,
+  textareaHeight,
   fontSize,
   radius,
   semantic,
@@ -126,13 +127,16 @@ describe("generated artifact parity", () => {
     }
   });
 
-  it("exposes the radius, spacing, font-size and control-height scales in the preset", () => {
+  it("exposes the radius, spacing, font-size, control-height and textarea-height scales in the preset", () => {
     const preset = readFileSync(presetFile, "utf8");
     for (const key of Object.keys(radius)) assert.ok(preset.includes(`"${key}"`), `radius.${key}`);
     for (const key of Object.keys(spacing)) assert.ok(preset.includes(`"${key}"`), `spacing.${key}`);
     for (const key of Object.keys(fontSize)) assert.ok(preset.includes(`"${key}"`), `fontSize.${key}`);
     for (const key of Object.keys(controlHeight)) {
       assert.ok(preset.includes(`"control-${key}"`), `controlHeight.${key}`);
+    }
+    for (const key of Object.keys(textareaHeight)) {
+      assert.ok(preset.includes(`"textarea-${key}"`), `textareaHeight.${key}`);
     }
   });
 
