@@ -101,6 +101,7 @@
     "package.json",
     "src/components/alert-dialog/alert-dialog.tsx",
     "src/components/alert-dialog/utils.ts",
+    "src/components/avatar/avatar-group.tsx",
     "src/components/avatar/avatar.tsx",
     "src/components/avatar/utils.ts",
     "src/components/badge/badge.tsx",
