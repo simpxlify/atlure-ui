@@ -52,7 +52,7 @@ export function SitterCard({ sitter, onOpen, openLabel }) {
 
 Components: `Text`, `Button`, `Card` (`CardHeader`, `CardContent`, `CardFooter`), `Input`, `Label`,
 `Badge`, `Avatar`, `Separator`, `Skeleton`, `Switch`, `Checkbox`, `Sheet`, `Select` (`SelectItem`),
-`Picker`, `Dialog`, `AlertDialog`, `Toast`.
+`Picker`, `Dialog`, `AlertDialog`, `Toast`, `MoneyLabel`, `DistanceLabel`, `DurationLabel`, `DateLabel`, `DateRangeLabel`.
 
 Overlays queue through a host, so the app root mounts it once, above the navigator:
 
@@ -68,6 +68,22 @@ Overlays queue through a host, so the app root mounts it once, above the navigat
 rendering nothing and leaving you to guess why.
 
 Every user-facing string is a prop. This package contains no display copy, so i18n stays in the app.
+The one exception is `MoneyLabel`'s `per` suffix, which renders the English words `per hour`, `per
+night` or `per walk`; a message catalogue is out of scope for v1, so this is the single string that
+must be revisited when translation lands.
+
+## Locale and number formatting
+
+`LocaleProvider` carries a BCP-47 locale and a measurement system (`metric` by default, `imperial`
+opt-in); `useLocale()` reads it. Without a provider the defaults are `en-IE` and `metric`.
+
+Every unit, currency symbol, separator and date order comes from `Intl`, never from a literal — so
+a price renders in its own currency regardless of the reader's locale, and `1 hr 30 mins` becomes
+`1 Std. 30 Min.` in `de-DE`. Money carries minor units, and the number of decimal places is read back
+from `Intl` for that currency rather than assumed to be two.
+
+This requires `Intl` to be present. Hermes needs it switched on explicitly in the app's
+`app.config.ts`; that change belongs to the app, not to this package.
 
 ## Variant recipes are shared, render layers are not
 
@@ -119,10 +135,10 @@ changing how it looks.
 `pnpm test` runs Vitest with React Testing Library. `react-native` is aliased to `react-native-web`
 so components render into jsdom and can be queried by role and accessible name.
 
-`@atlure/tokens` is resolved to `../tokens/src` for typechecking and testing, via `paths` in
-`tsconfig.json` and an alias in `vitest.config.ts`. Published consumers still get `dist` through that
-package's `exports`; resolving to source here means this package's checks do not depend on tokens having
-been built first, and can never read a stale `dist`.
+`@atlure/tokens` and `@atlure/types` are resolved to `../tokens/src` and `../types/src` for
+typechecking and testing, via `paths` in `tsconfig.json` and aliases in `vitest.config.ts`. Published
+consumers still get `dist` through those packages' `exports`; resolving to source here means this
+package's checks do not depend on either having been built first, and can never read a stale `dist`.
 
 What that proves: press handling, disabled and loading behaviour, controlled toggle state, change
 propagation, accessible roles and names, and the barrel generator's output.
