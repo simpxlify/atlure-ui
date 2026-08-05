@@ -10,11 +10,13 @@ export const buttonVariants = cva(
         outline: "border-border/20 bg-transparent",
         ghost: "bg-transparent",
         destructive: "bg-destructive",
+        link: "bg-transparent",
       },
       size: {
         sm: "h-control-sm px-sm",
         md: "h-control-md px-md",
         lg: "h-control-lg px-lg",
+        icon: "h-control-icon w-control-icon px-0",
       },
       isFullWidth: {
         true: "w-full",
@@ -42,11 +44,13 @@ export const buttonLabelVariants = cva("text-center font-medium", {
       outline: "text-foreground",
       ghost: "text-foreground",
       destructive: "text-destructive-foreground",
+      link: "text-primary underline",
     },
     size: {
       sm: "text-sm",
       md: "text-base",
       lg: "text-base",
+      icon: "text-base",
     },
   },
   defaultVariants: {

@@ -103,6 +103,7 @@
     "src/components/card/card-section.tsx",
     "src/components/card/card.tsx",
     "src/components/checkbox/checkbox.tsx",
+    "src/components/icon-button/icon-button.tsx",
     "src/components/input/input.tsx",
     "src/components/label/label.tsx",
     "src/components/separator/separator.tsx",
@@ -131,8 +132,8 @@
   ],
   "@atlure/ui-web": [
     "README.md",
-    "dist/chunk-OBOQO264.js",
-    "dist/chunk-OBOQO264.js.map",
+    "dist/chunk-XOZ5NTD5.js",
+    "dist/chunk-XOZ5NTD5.js.map",
     "dist/index.cjs",
     "dist/index.cjs.map",
     "dist/index.d.cts",

@@ -31,7 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 ) {
   const Component = asChild ? Slot : 'button';
   const isDisabled = disabled || isLoading;
-  const disabledProps = asChild ? {} : { disabled: isDisabled };
+  const nativeButtonProps = asChild ? {} : { disabled: isDisabled, type: 'button' as const };
 
   return (
     <Component
@@ -39,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       className={cn(buttonVariants({ variant, size, isFullWidth }), className)}
       aria-disabled={isDisabled || undefined}
       aria-busy={isLoading || undefined}
-      {...disabledProps}
+      {...nativeButtonProps}
       {...props}
     >
       {isLoading ? <Spinner /> : startSlot}
