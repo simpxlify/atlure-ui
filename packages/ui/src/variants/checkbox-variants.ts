@@ -1,5 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
+export const checkboxBoxSize = 24;
+
 export const checkboxRowVariants = cva("flex-row items-center gap-sm", {
   variants: {
     isDisabled: {
@@ -14,7 +16,7 @@ export const checkboxRowVariants = cva("flex-row items-center gap-sm", {
 
 export const checkboxBoxVariants = cva("h-6 w-6 items-center justify-center rounded-sm border-2", {
   variants: {
-    isChecked: {
+    isSelected: {
       true: "border-primary bg-primary",
       false: "border-border/20 bg-input-background",
     },
@@ -24,23 +26,12 @@ export const checkboxBoxVariants = cva("h-6 w-6 items-center justify-center roun
     },
   },
   defaultVariants: {
-    isChecked: false,
+    isSelected: false,
     isInvalid: false,
   },
 });
 
-export const checkboxIndicatorVariants = cva("h-3 w-3 rounded-sm", {
-  variants: {
-    isChecked: {
-      true: "bg-primary-foreground",
-      false: "bg-transparent",
-    },
-  },
-  defaultVariants: {
-    isChecked: false,
-  },
-});
+export const checkboxIndicatorClassName = "text-primary-foreground";
 
 export type CheckboxRowVariantProps = VariantProps<typeof checkboxRowVariants>;
 export type CheckboxBoxVariantProps = VariantProps<typeof checkboxBoxVariants>;
-export type CheckboxIndicatorVariantProps = VariantProps<typeof checkboxIndicatorVariants>;
