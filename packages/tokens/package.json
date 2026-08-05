@@ -36,7 +36,7 @@
     "generate": "pnpm run compile:tools && node .build/scripts/build-tokens.js",
     "build": "pnpm run generate && tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.tools.json --noEmit",
-    "test": "pnpm run generate && node --test \".build/test/**/*.test.js\"",
+    "test": "pnpm run compile:tools && node --test \".build/test/**/*.test.js\"",
     "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true});fs.rmSync('generated',{recursive:true,force:true});fs.rmSync('.build',{recursive:true,force:true})\""
   },
   "devDependencies": {

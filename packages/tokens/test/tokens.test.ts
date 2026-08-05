@@ -160,7 +160,14 @@ describe("generated artifact parity", () => {
       hash.update(key);
       hash.update(contents[key] as string);
     }
-    assert.equal(hash.digest("hex"), recorded.sha256);
+
+    assert.equal(
+      hash.digest("hex"),
+      recorded.sha256,
+      `a generated artifact has been hand-edited. One of ${Object.keys(contents)
+        .sort()
+        .join(", ")} no longer matches the checksum recorded by the generator. Change packages/tokens/src/tokens.ts and re-run "pnpm --filter @atlure/tokens generate" instead of editing generated output.`,
+    );
   });
 });
 
