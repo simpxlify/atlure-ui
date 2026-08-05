@@ -17,4 +17,6 @@ export const labelVariants = cva("text-sm font-medium text-foreground", {
   },
 });
 
+export const labelRequiredMarkerClassName = "text-destructive";
+
 export type LabelVariantProps = VariantProps<typeof labelVariants>;

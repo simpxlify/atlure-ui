@@ -85,7 +85,10 @@ const PLATFORM_ONLY_AXES: Record<string, { webOnly: string[]; nativeOnly: string
   button: { webOnly: [], nativeOnly: ['isDisabled'] },
   badge: { webOnly: [], nativeOnly: ['size'] },
   card: { webOnly: ['padding'], nativeOnly: [] },
-  input: { webOnly: [], nativeOnly: ['isDisabled', 'isMultiline'] },
+  input: {
+    webOnly: [],
+    nativeOnly: ['hasLeadingIcon', 'hasTrailingIcon', 'isDisabled', 'isMultiline'],
+  },
 };
 
 const OPTION_DRIFT_ALLOWED: Record<string, Record<string, { web: string[]; native: string[] }>> = {};
