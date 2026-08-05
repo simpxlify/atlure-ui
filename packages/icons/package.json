@@ -1,0 +1,74 @@
+{
+  "name": "@atlure/icons",
+  "version": "0.2.0",
+  "description": "Atlure icon set: one lucide import path for React Native and the DOM, resolved by export condition",
+  "license": "MIT",
+  "author": "David Moreira",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpxlify/atlure-ui.git",
+    "directory": "packages/icons"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/web.js",
+  "types": "./dist/web.d.ts",
+  "exports": {
+    ".": {
+      "react-native": {
+        "types": "./dist/native.d.ts",
+        "default": "./dist/native.js"
+      },
+      "types": "./dist/web.d.ts",
+      "default": "./dist/web.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "generate:entries": "node scripts/generate-entries.mjs",
+    "build": "pnpm run generate:entries && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@atlure/tokens": "workspace:*",
+    "lucide-react": "1.28.0",
+    "lucide-react-native": "1.28.0"
+  },
+  "peerDependencies": {
+    "nativewind": "^4.2.6",
+    "react": ">=18.3.0",
+    "react-native": ">=0.81.0",
+    "react-native-svg": ">=15.0.0"
+  },
+  "peerDependenciesMeta": {
+    "nativewind": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.9",
+    "nativewind": "4.2.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.4",
+    "react-native-svg": "15.15.5",
+    "react-native-web": "0.21.1",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4"
+  }
+}
