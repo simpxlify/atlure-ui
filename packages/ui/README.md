@@ -52,7 +52,20 @@ export function SitterCard({ sitter, onOpen, openLabel }) {
 
 Components: `Text`, `Button`, `Card` (`CardHeader`, `CardContent`, `CardFooter`), `Input`, `Label`,
 `Badge`, `Avatar`, `Separator`, `Skeleton`, `Switch`, `Checkbox`, `Sheet`, `Select` (`SelectItem`),
-`Picker`.
+`Picker`, `Dialog`, `AlertDialog`, `Toast`.
+
+Overlays queue through a host, so the app root mounts it once, above the navigator:
+
+```tsx
+<PortalHost>
+  <ToastProvider bottomInset={insets.bottom}>
+    <Navigator />
+  </ToastProvider>
+</PortalHost>
+```
+
+`Dialog`, `AlertDialog` and `Toast` throw a named error if that host is missing, rather than
+rendering nothing and leaving you to guess why.
 
 Every user-facing string is a prop. This package contains no display copy, so i18n stays in the app.
 

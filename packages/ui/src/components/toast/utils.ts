@@ -1,0 +1,2 @@
+export const TOAST_DEFAULT_DURATION = 4000;
+export const TOAST_SWIPE_DISMISS_DISTANCE = 48;
