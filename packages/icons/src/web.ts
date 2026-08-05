@@ -68,6 +68,7 @@ export {
   Share2,
   Shield,
   Star,
+  StarHalf,
   Sun,
   Target,
   Trash2,
