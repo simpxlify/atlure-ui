@@ -1,5 +1,11 @@
 # @atlure/types
 
+## 0.4.0
+
+### Minor Changes
+
+- [#72](https://github.com/simpxlify/atlure-ui/pull/72) [`6bebb2b`](https://github.com/simpxlify/atlure-ui/commit/6bebb2bdb253a59e518eac3157bd2a08be8582a3) Thanks [@simpxlify](https://github.com/simpxlify)! - Add shared `ErrorCode` / `Result<T>` model and `errorMessageKey` helper so `atlure-paw`, `atlure-web`, and `atlure-api` can speak the same error taxonomy.
+
 ## 0.3.0
 
 ### Patch Changes

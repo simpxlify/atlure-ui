@@ -1,6 +1,6 @@
 {
   "name": "@atlure/tailwind-preset",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Atlure Tailwind preset, generated from @atlure/tokens and shared by web (Tailwind) and mobile (NativeWind)",
   "license": "MIT",
   "author": "David Moreira",
