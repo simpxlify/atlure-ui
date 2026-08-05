@@ -1,4 +1,28 @@
 {
+  "@atlure/icons": [
+    "README.md",
+    "dist/icon-names.d.ts",
+    "dist/icon-names.d.ts.map",
+    "dist/icon-names.js",
+    "dist/icon-names.js.map",
+    "dist/icon-props.d.ts",
+    "dist/icon-props.d.ts.map",
+    "dist/icon-props.js",
+    "dist/icon-props.js.map",
+    "dist/native.d.ts",
+    "dist/native.d.ts.map",
+    "dist/native.js",
+    "dist/native.js.map",
+    "dist/register-icon-interop.d.ts",
+    "dist/register-icon-interop.d.ts.map",
+    "dist/register-icon-interop.js",
+    "dist/register-icon-interop.js.map",
+    "dist/web.d.ts",
+    "dist/web.d.ts.map",
+    "dist/web.js",
+    "dist/web.js.map",
+    "package.json"
+  ],
   "@atlure/tailwind-preset": [
     "README.md",
     "generated/index.js",
