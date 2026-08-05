@@ -18,11 +18,18 @@ emulator / simulator / Docker / Metro.
 - [x] 027 Text + typography scale — PR #58, `feature/ds-text-typography`. 36 tests in `@atlure/ui`
 - [x] 016 hex lint + checksum guard (taken out of sequence) — PR #59,
       `feature/ds-hex-lint-and-checksum`. Unblocks the `pnpm lint` criterion on 027-033
-- [ ] 028 Button / IconButton
+- [x] 028 Button / IconButton — PR #62 (stacked on #58), `feature/ds-button-and-icon-button`.
+      48 tests in @atlure/ui, 20 in @atlure/ui-web
 - [ ] 029 Card family / Separator
 - [ ] 033 Input / Textarea / Label / FormField / SearchBar
 - [ ] 039 Skeleton / Spinner / EmptyState / ErrorState / ListRow
 - [ ] wide batch
+
+### Filed / folded (agreed with the lead)
+
+- **#61** — Storybook cannot render native components. Blocks a story AC across 027-040.
+- **#18** — folded in the per-artifact-checksum limitation from 016.
+- **#60** — tokens/types CJS resolution fix (Agent C report).
 
 ## Notes
 
@@ -94,3 +101,20 @@ emulator / simulator / Docker / Metro.
   probed with `h-control-md` (a class that exists nowhere else). This is the first actual
   evidence the untranspiled-source shipping strategy works from the consumer side — it had been
   assumed, not proven, and the whole `@atlure/ui` design rests on it.
+
+### 028 decisions worth not re-litigating
+
+- **Variant/size names stay `primary` and `sm/md/lg`.** Ticket 028 asks for shadcn's
+  `default` and `sm/default/lg/icon`. Rejected: `primary` is published at 0.2.0, the size names
+  mirror the token scale they resolve to (`size="md"` -> `h-control-md` -> `controlHeight.md`),
+  and renaming would break parity with web or force a cross-package API break.
+- **Adding `size="icon"` to native emptied the parity allow-list.** `OPTION_DRIFT_ALLOWED` now has
+  no entry for `button` — web already had `icon` and the gap was parked there. Keep it empty.
+- **Ticket 028's Context paragraph is wrong** where it says the cva recipe is "imported unchanged
+  by `@atlure/ui-web`". Recipe sharing was reversed in `platform-arch.md`; only the API surface is
+  shared. Do not act on that line in 041 either.
+- **`h-control-*` over `h-9`/`h-10`/`h-12`.** The AC's intent was to avoid a JS height lookup;
+  `h-control-md` is a preset class driven by tokens, whereas `h-10` hardcodes a size outside them.
+- Web `Button` defaulted to `type="submit"` and submitted any form it sat in. Fixed to
+  `type="button"`, applied before the prop spread so an explicit `type` still wins, and only on the
+  real `button` element (not when `asChild` renders an `<a>`).
