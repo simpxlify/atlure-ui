@@ -14,4 +14,19 @@ export const skeletonVariants = cva("bg-muted", {
   },
 });
 
+export const skeletonCompositionVariants = cva("", {
+  variants: {
+    composition: {
+      card: "w-full gap-sm rounded-lg bg-card p-md",
+      listRow: "w-full gap-sm py-sm",
+      avatarRow: "w-full flex-row items-center gap-md py-sm",
+      avatarRowText: "flex-1 gap-sm",
+    },
+  },
+  defaultVariants: {
+    composition: "card",
+  },
+});
+
 export type SkeletonVariantProps = VariantProps<typeof skeletonVariants>;
+export type SkeletonCompositionVariantProps = VariantProps<typeof skeletonCompositionVariants>;
