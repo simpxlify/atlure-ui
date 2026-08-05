@@ -3,6 +3,8 @@ import { Animated, type ViewProps } from "react-native";
 import { cn } from "../../lib/cn";
 import { skeletonVariants, type SkeletonVariantProps } from "../../variants/skeleton-variants";
 import { usePulseOpacity } from "./hooks/use-pulse-opacity";
+import { useReducedMotion } from "./hooks/use-reduced-motion";
+import { shouldAnimateSkeleton } from "./utils";
 
 export interface SkeletonProps extends Omit<ViewProps, "children"> {
   shape?: NonNullable<SkeletonVariantProps["shape"]>;
@@ -18,7 +20,8 @@ export function Skeleton({
   style,
   ...viewProps
 }: SkeletonProps) {
-  const opacity = usePulseOpacity(isAnimated);
+  const isReducedMotion = useReducedMotion();
+  const opacity = usePulseOpacity(shouldAnimateSkeleton({ isAnimated, isReducedMotion }));
 
   return (
     <Animated.View
