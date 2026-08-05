@@ -20,3 +20,5 @@ per-toast auto-dismiss duration, swipe to dismiss, and
 
 The overlay backdrop now lives in one place, `overlayBackdropClassName`, shared by `Sheet` and the
 dialogs rather than duplicated.
+
+The success toast paints from the `success` semantic token, which arrives in a separate tokens change.

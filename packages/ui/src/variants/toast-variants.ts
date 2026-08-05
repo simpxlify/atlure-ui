@@ -6,7 +6,7 @@ export const toastVariants = cva("w-full flex-row items-center gap-sm rounded-lg
   variants: {
     variant: {
       default: "bg-card",
-      success: "bg-primary",
+      success: "bg-success",
       error: "bg-destructive",
     },
   },
@@ -19,7 +19,7 @@ export const toastMessageVariants = cva("flex-1 text-base", {
   variants: {
     variant: {
       default: "text-foreground",
-      success: "text-primary-foreground",
+      success: "text-success-foreground",
       error: "text-destructive-foreground",
     },
   },

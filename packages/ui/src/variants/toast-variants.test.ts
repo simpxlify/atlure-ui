@@ -7,8 +7,12 @@ const VARIANTS = ["default", "success", "error"] as const;
 describe("When a toast variant is resolved", () => {
   it("paints each variant from a colour token", () => {
     expect(toastVariants({ variant: "default" })).toContain("bg-card");
-    expect(toastVariants({ variant: "success" })).toContain("bg-primary");
+    expect(toastVariants({ variant: "success" })).toContain("bg-success");
     expect(toastVariants({ variant: "error" })).toContain("bg-destructive");
+  });
+
+  it("pairs the success message colour with the success surface", () => {
+    expect(toastMessageVariants({ variant: "success" })).toContain("text-success-foreground");
   });
 
   it("gives every variant a message colour, because React Native does not inherit text style", () => {
