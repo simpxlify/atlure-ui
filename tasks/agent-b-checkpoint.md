@@ -54,10 +54,26 @@ emulator / simulator / Docker / Metro.
 ### 027 findings — these change how every native component gets tested
 
 - **`react-native-web` drops `className` entirely.** `<Text variant="h1" className="text-destructive">`
-  renders as `<div dir="auto" class="css-text-146c3p1">`. No test in `packages/ui` can assert a
-  resolved class through the DOM, which is why none of the existing ones do. Put class
+  renders as `<div dir="auto" class="css-text-146c3p1">`. So with **this package's current harness**
+  (vitest + jsdom + the `react-native` → `react-native-web` alias) no test in `packages/ui` can
+  assert a resolved class through the DOM, which is why none of the existing ones do. Put class
   composition in a co-located `utils.ts` (the barrel generator treats it as internal) and
   assert the function. Any ticket asking for a `className` render assertion needs amending.
+- **That limit is the harness, not NativeWind** — corrected by Agent C, who verified the
+  alternative in `atlure-paw`. Under the native `jest-expo` preset with `nativewind/test`, which
+  drives NativeWind's **native** runtime (`react-native-css-interop`) rather than the web output,
+  `className="bg-primary"` resolves to a real style object — `{ backgroundColor: "hsla(20.5, 90.2%,
+  48.2%, 1)" }`, i.e. the brand orange. `react-native-web` is not installed there at all.
+  So if `atlure-ui` ever wants a genuine "the class landed" assertion, it needs a **second**
+  test project on the native preset; do not try to make the react-native-web suite assert a style
+  it structurally cannot carry. Agent C offered their `jest.config.js` and
+  `nativewind-transform.native.test.tsx` to lift wholesale. Their trap to inherit: the
+  `transformIgnorePatterns` must be **path-position-independent** (`node_modules/(?!.*(...))`),
+  because pnpm's `.pnpm/` nesting defeats the conventional shape.
+- **Consequence for ticket 061:** it is still device-only, but what it *uniquely* proves has
+  narrowed to **Metro's CSS injection and the on-device runtime**. The Babel transform, the preset
+  and the token variables are all now proven at code level in `atlure-paw`. If the device check
+  fails, look at Metro and the runtime first.
 - **`apps/storybook-web` cannot render native components at all.** It depends only on
   `@atlure/ui-web`; no `@atlure/ui`, no `react-native` alias, no NativeWind web pipeline.
   A native story added today would render unstyled and mislead. `@storybook/react-native-web-vite`
@@ -84,6 +100,9 @@ emulator / simulator / Docker / Metro.
   one; these two were the only stragglers.
   Cost `atlure-paw` an absolute-path `require()` of `dist/navigation.js` plus a jest
   `moduleNameMapper`. Both can be deleted once a release publishes — not before.
+- Agent C does **not** need a holding action for the preset-types gap: they exempted the two
+  affected files in `atlure-paw`'s own `eslint.config.js`, so that repo is at 0 errors / 0
+  warnings today. It is off 017's critical path.
 - **`@atlure/tailwind-preset` ships no `types`** (`types` undefined, `exports` a bare string
   target), so consumers must `require()` it and trip `@typescript-eslint/no-require-imports`.
   Deliberately not fixed: its only entry is `generated/index.js` and `AGENTS.md` forbids
