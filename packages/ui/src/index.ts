@@ -13,6 +13,7 @@ export * from "./components/separator/separator";
 export * from "./components/skeleton/skeleton";
 export * from "./components/switch/switch";
 export * from "./components/text/text";
+export * from "./components/text/text-class-context";
 export * from "./lib/cn";
 export * from "./lib/touch-target";
 export * from "./variants/avatar-variants";

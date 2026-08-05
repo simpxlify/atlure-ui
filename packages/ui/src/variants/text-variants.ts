@@ -1,21 +1,23 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
-export const textVariants = cva("text-foreground", {
+export const textVariants = cva("", {
   variants: {
     variant: {
       display: "text-3xl font-bold",
-      heading: "text-2xl font-bold",
-      title: "text-xl font-semibold",
-      subtitle: "text-lg font-medium",
+      h1: "text-2xl font-bold",
+      h2: "text-xl font-semibold",
+      h3: "text-lg font-semibold",
       body: "text-base font-normal",
-      caption: "text-sm font-normal",
-      overline: "text-xs font-medium uppercase",
+      bodySm: "text-sm font-normal",
+      label: "text-sm font-medium",
+      caption: "text-xs font-normal",
     },
     tone: {
       default: "text-foreground",
       muted: "text-muted-foreground",
       primary: "text-primary",
       destructive: "text-destructive",
+      inverse: "text-primary-foreground",
     },
   },
   defaultVariants: {
