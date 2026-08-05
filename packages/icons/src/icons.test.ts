@@ -23,4 +23,30 @@ describe("When rendering a DOM icon with no explicit props", () => {
     expect(markup).toContain(`height="${iconSize.lg}"`);
     expect(markup).toContain('stroke-width="2"');
   });
+
+  it("leaves an icon unfilled, so a filled variant is opt-in", () => {
+    const markup = renderToStaticMarkup(createElement(webEntry.Star));
+
+    expect(markup).toContain('fill="none"');
+  });
+});
+
+describe("When rendering an icon with a fill", () => {
+  it("paints the shape, which is how a filled star is expressed", () => {
+    const markup = renderToStaticMarkup(
+      createElement(webEntry.Star, { fill: "currentColor" }),
+    );
+
+    expect(markup).toContain('fill="currentColor"');
+    expect(markup).not.toContain('fill="none"');
+  });
+});
+
+describe("When a rating needs a half step", () => {
+  it("exposes a half-star distinct from the whole star", () => {
+    const half = renderToStaticMarkup(createElement(webEntry.StarHalf));
+    const whole = renderToStaticMarkup(createElement(webEntry.Star));
+
+    expect(half).not.toBe(whole);
+  });
 });

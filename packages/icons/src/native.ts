@@ -62,6 +62,7 @@ import Settings from "lucide-react-native/icons/settings";
 import Share2 from "lucide-react-native/icons/share-2";
 import Shield from "lucide-react-native/icons/shield";
 import Star from "lucide-react-native/icons/star";
+import StarHalf from "lucide-react-native/icons/star-half";
 import Sun from "lucide-react-native/icons/sun";
 import Target from "lucide-react-native/icons/target";
 import Trash2 from "lucide-react-native/icons/trash-2";
@@ -144,6 +145,7 @@ registerIconInterop([
   Share2,
   Shield,
   Star,
+  StarHalf,
   Sun,
   Target,
   Trash2,
@@ -220,6 +222,7 @@ export {
   Share2,
   Shield,
   Star,
+  StarHalf,
   Sun,
   Target,
   Trash2,

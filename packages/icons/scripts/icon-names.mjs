@@ -61,6 +61,7 @@ export const ICON_NAMES = [
   "Share2",
   "Shield",
   "Star",
+  "StarHalf",
   "Sun",
   "Target",
   "Trash2",
