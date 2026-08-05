@@ -51,7 +51,8 @@ export function SitterCard({ sitter, onOpen, openLabel }) {
 ```
 
 Components: `Text`, `Button`, `Card` (`CardHeader`, `CardContent`, `CardFooter`), `Input`, `Label`,
-`Badge`, `Avatar`, `Separator`, `Skeleton`, `Switch`, `Checkbox`.
+`Badge`, `Avatar`, `Separator`, `Skeleton`, `Switch`, `Checkbox`, `Sheet`, `Select` (`SelectItem`),
+`Picker`.
 
 Every user-facing string is a prop. This package contains no display copy, so i18n stays in the app.
 
