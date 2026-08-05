@@ -66,7 +66,7 @@ describe("When an avatar image is loading", () => {
     render(<Avatar name="Ana Pereira" src="https://atlure.test/loading.jpg" />);
 
     expect(
-      screen.getByRole("progressbar", { name: /loading the photo of ana pereira/i }),
+      screen.getByRole("progressbar", { name: "Ana Pereira" }),
     ).toBeTruthy();
 
     act(() => {
@@ -75,7 +75,7 @@ describe("When an avatar image is loading", () => {
 
     await waitFor(() => {
       expect(
-        screen.queryByRole("progressbar", { name: /loading the photo of ana pereira/i }),
+        screen.queryByRole("progressbar", { name: "Ana Pereira" }),
       ).toBeNull();
     });
 
@@ -121,30 +121,43 @@ describe("When an avatar declares a presence", () => {
   it("exposes an online dot to screen readers", () => {
     render(<Avatar name="Ana Pereira" presence="online" />);
 
-    expect(screen.getByLabelText("Ana Pereira is online")).toBeTruthy();
+    expect(screen.getByLabelText("Ana Pereira online")).toBeTruthy();
   });
 
   it("exposes an offline dot to screen readers", () => {
     render(<Avatar name="Ana Pereira" presence="offline" />);
 
-    expect(screen.getByLabelText("Ana Pereira is offline")).toBeTruthy();
+    expect(screen.getByLabelText("Ana Pereira offline")).toBeTruthy();
   });
 
   it("renders no presence dot when presence is none", () => {
     render(<Avatar name="Ana Pereira" presence="none" />);
 
-    expect(screen.queryByLabelText(/is online/)).toBeNull();
-    expect(screen.queryByLabelText(/is offline/)).toBeNull();
+    expect(screen.queryByLabelText(/ online$/)).toBeNull();
+    expect(screen.queryByLabelText(/ offline$/)).toBeNull();
   });
 
   it("renders a presence dot at every size", () => {
     for (const size of SIZES) {
       const { unmount } = render(<Avatar name="Ana Pereira" size={size} presence="online" />);
 
-      expect(screen.getByLabelText("Ana Pereira is online")).toBeTruthy();
+      expect(screen.getByLabelText("Ana Pereira online")).toBeTruthy();
 
       unmount();
     }
+  });
+
+  it("lets the app supply a localized presence label", () => {
+    render(
+      <Avatar
+        name="Ana Pereira"
+        presence="online"
+        presenceAccessibilityLabel="Ana Pereira em linha"
+      />,
+    );
+
+    expect(screen.getByLabelText("Ana Pereira em linha")).toBeTruthy();
+    expect(screen.queryByLabelText("Ana Pereira online")).toBeNull();
   });
 });
 
@@ -159,7 +172,7 @@ describe("When an avatar group overflows", () => {
     );
 
     expect(screen.getAllByRole("img")).toHaveLength(4);
-    expect(screen.getByLabelText("+3 more")).toBeTruthy();
+    expect(screen.getByLabelText("+3")).toBeTruthy();
     expect(screen.getByText("+3")).toBeTruthy();
   });
 
@@ -173,6 +186,6 @@ describe("When an avatar group overflows", () => {
     );
 
     expect(screen.getAllByRole("img")).toHaveLength(3);
-    expect(screen.queryByLabelText(/ more$/)).toBeNull();
+    expect(screen.queryByLabelText(/^\+/)).toBeNull();
   });
 });

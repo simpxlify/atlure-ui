@@ -21,6 +21,8 @@ export interface AvatarProps extends ViewProps {
   size?: NonNullable<AvatarVariantProps["size"]>;
   shape?: NonNullable<AvatarVariantProps["shape"]>;
   presence?: AvatarPresence;
+  presenceAccessibilityLabel?: string;
+  loadingAccessibilityLabel?: string;
   hasRing?: boolean;
 }
 
@@ -30,6 +32,8 @@ export function Avatar({
   size = "md",
   shape = "circle",
   presence = "none",
+  presenceAccessibilityLabel,
+  loadingAccessibilityLabel,
   hasRing = false,
   className,
   ...viewProps
@@ -59,7 +63,7 @@ export function Avatar({
             {isLoading ? (
               <Skeleton
                 shape="circle"
-                accessibilityLabel={`Loading the photo of ${name}`}
+                accessibilityLabel={loadingAccessibilityLabel ?? name}
                 className="absolute inset-0 h-full w-full"
               />
             ) : null}
@@ -70,7 +74,7 @@ export function Avatar({
       </View>
       {presence === "none" ? null : (
         <View
-          accessibilityLabel={`${name} is ${presence}`}
+          accessibilityLabel={presenceAccessibilityLabel ?? `${name} ${presence}`}
           className={avatarPresenceVariants({ size, presence })}
         />
       )}

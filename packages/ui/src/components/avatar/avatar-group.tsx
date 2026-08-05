@@ -15,12 +15,14 @@ export interface AvatarGroupProps extends Omit<ViewProps, "children"> {
   children: ReactNode;
   max?: number;
   size?: NonNullable<AvatarVariantProps["size"]>;
+  overflowAccessibilityLabel?: string;
 }
 
 export function AvatarGroup({
   children,
   max = 4,
   size = "md",
+  overflowAccessibilityLabel,
   className,
   ...viewProps
 }: AvatarGroupProps) {
@@ -37,7 +39,7 @@ export function AvatarGroup({
       ))}
       {overflowCount > 0 ? (
         <View
-          accessibilityLabel={`+${overflowCount} more`}
+          accessibilityLabel={overflowAccessibilityLabel ?? `+${overflowCount}`}
           className={avatarGroupItemVariants({ size, isFirst: false })}
         >
           <View className={avatarVariants({ size })}>
