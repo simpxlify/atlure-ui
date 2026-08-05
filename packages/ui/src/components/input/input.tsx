@@ -1,34 +1,85 @@
-import { TextInput, type TextInputProps } from "react-native";
+import type { ComponentRef, ReactNode, Ref } from "react";
+import { TextInput, type TextInputProps, View } from "react-native";
 
 import { cn } from "../../lib/cn";
 import { touchTargetHitSlop } from "../../lib/touch-target";
-import { inputVariants, type InputVariantProps } from "../../variants/input-variants";
+import {
+  inputFieldWrapperClassName,
+  inputIconSlotVariants,
+  inputVariants,
+  type InputVariantProps,
+} from "../../variants/input-variants";
+import { useFormFieldControl } from "../form-field/form-field-context";
 
 export interface InputProps extends Omit<TextInputProps, "editable" | "multiline"> {
   size?: NonNullable<InputVariantProps["size"]>;
   isDisabled?: boolean;
   isInvalid?: boolean;
+  isRequired?: boolean;
   isMultiline?: boolean;
+  leadingIcon?: ReactNode;
+  trailingIcon?: ReactNode;
+  ref?: Ref<ComponentRef<typeof TextInput>>;
 }
 
 export function Input({
   size = "md",
-  isDisabled = false,
-  isInvalid = false,
+  isDisabled,
+  isInvalid,
+  isRequired,
   isMultiline = false,
+  leadingIcon,
+  trailingIcon,
   className,
+  nativeID,
   ...textInputProps
 }: InputProps) {
-  return (
+  const field = useFormFieldControl();
+  const isControlDisabled = isDisabled ?? field?.isDisabled ?? false;
+  const isControlInvalid = isInvalid ?? field?.isInvalid ?? false;
+  const isControlRequired = isRequired ?? field?.isRequired ?? false;
+
+  const control = (
     <TextInput
-      accessibilityState={{ disabled: isDisabled }}
-      aria-disabled={isDisabled}
-      aria-invalid={isInvalid}
-      editable={!isDisabled}
+      accessibilityState={{ disabled: isControlDisabled }}
+      accessibilityLabelledBy={field?.labelledBy}
+      aria-labelledby={field?.labelledBy}
+      aria-describedby={field?.describedBy}
+      aria-disabled={isControlDisabled}
+      aria-invalid={isControlInvalid}
+      aria-required={isControlRequired}
+      nativeID={nativeID ?? field?.nativeID}
+      editable={!isControlDisabled}
       multiline={isMultiline}
       hitSlop={touchTargetHitSlop(size)}
-      className={cn(inputVariants({ size, isInvalid, isDisabled, isMultiline }), className)}
+      className={cn(
+        inputVariants({
+          size,
+          isInvalid: isControlInvalid,
+          isDisabled: isControlDisabled,
+          isMultiline,
+          hasLeadingIcon: Boolean(leadingIcon),
+          hasTrailingIcon: Boolean(trailingIcon),
+        }),
+        className,
+      )}
       {...textInputProps}
     />
+  );
+
+  if (!leadingIcon && !trailingIcon) {
+    return control;
+  }
+
+  return (
+    <View className={inputFieldWrapperClassName}>
+      {leadingIcon ? (
+        <View className={inputIconSlotVariants({ slot: "leading" })}>{leadingIcon}</View>
+      ) : null}
+      {control}
+      {trailingIcon ? (
+        <View className={inputIconSlotVariants({ slot: "trailing" })}>{trailingIcon}</View>
+      ) : null}
+    </View>
   );
 }

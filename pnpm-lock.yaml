@@ -163,6 +163,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@atlure/icons':
+        specifier: workspace:*
+        version: link:../icons
       '@atlure/tokens':
         specifier: workspace:*
         version: link:../tokens
@@ -178,6 +181,9 @@ importers:
       react-native-safe-area-context:
         specifier: '>=4.10.0'
         version: 5.8.1(react-native@0.81.4(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.1.8)(react@19.1.0)(supports-color@8.1.1))(react@19.1.0)
+      react-native-svg:
+        specifier: '>=15.0.0'
+        version: 15.15.5(react-native@0.81.4(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.1.8)(react@19.1.0)(supports-color@8.1.1))(react@19.1.0)
       tailwind-merge:
         specifier: 2.6.0
         version: 2.6.0
