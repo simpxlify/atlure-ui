@@ -56,3 +56,6 @@ export type {
   SupportTicket,
   Bookmark,
 } from "./support.js";
+
+export type { ErrorCode, ResultError, Result } from "./result.js";
+export { errorMessageKey } from "./result.js";
