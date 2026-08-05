@@ -67,3 +67,30 @@ emulator / simulator / Docker / Metro.
   sha256 — per-artifact checksums need a generator change that ticket 016 forbids.
 - `apps/storybook-web/scripts/verify-theme.mjs` hardcodes `rgb(234, 88, 12)`. Exempted from the
   lint rule rather than rewritten; it should derive from `@atlure/tokens`.
+
+### Packaging defects found from the consumer side (reported by Agent C, atlure-paw)
+
+- **`@atlure/tokens` and `@atlure/types` declared only `types` + `import`** on their root
+  export, with no fallback, so any resolver not matching `import` failed *outright* with
+  `ERR_PACKAGE_PATH_NOT_EXPORTED` — jest, postcss configs, any `*.config.js`. Fixed in PR #60
+  by adding a `default` condition after `import`. `@atlure/ui` and `@atlure/icons` already had
+  one; these two were the only stragglers.
+  Cost `atlure-paw` an absolute-path `require()` of `dist/navigation.js` plus a jest
+  `moduleNameMapper`. Both can be deleted once a release publishes — not before.
+- **`@atlure/tailwind-preset` ships no `types`** (`types` undefined, `exports` a bare string
+  target), so consumers must `require()` it and trip `@typescript-eslint/no-require-imports`.
+  Deliberately not fixed: its only entry is `generated/index.js` and `AGENTS.md` forbids
+  hand-editing under `generated/`, so a hand-written `index.d.ts` cannot sit beside it. Needs a
+  decision — a `types/` directory outside `generated/`, or teach the generator to emit the
+  `.d.ts` so it stays under the checksum guard. Belongs to ticket 017 (#20).
+
+### NativeWind test-harness traps (from Agent C, verified empirically there)
+
+- **`nativewind/test`'s `render` hard-overrides `presets`** with its own. A custom preset can
+  only be injected as `config.theme`. Do not expect `@atlure/tailwind-preset` to apply through
+  `presets` in a NativeWind render test.
+- **`nativewind/test` has an undeclared dependency on `@tailwindcss/container-queries`.**
+- **Tailwind's content scan does traverse the pnpm symlink into `node_modules/@atlure/ui/src`**,
+  probed with `h-control-md` (a class that exists nowhere else). This is the first actual
+  evidence the untranspiled-source shipping strategy works from the consumer side — it had been
+  assumed, not proven, and the whole `@atlure/ui` design rests on it.
