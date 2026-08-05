@@ -1,5 +1,20 @@
 # @atlure/ui-web
 
+## 0.3.0
+
+### Minor Changes
+
+- [#62](https://github.com/simpxlify/atlure-ui/pull/62) [`2dbd220`](https://github.com/simpxlify/atlure-ui/commit/2dbd220a49b999b63441a6aded7178a7cdcfe29e) Thanks [@simpxlify](https://github.com/simpxlify)! - Add `IconButton`, a `link` variant and an `icon` size to the native `Button`, and wire its label colour through `TextClassProvider` so nested `Text` inherits it instead of each caller repeating classes.
+
+  Adding `icon` to native closes a real parity divergence: web already had it and the gap was sitting in the parity test's allow-list, which is now empty for `button`. `link` was added to both platforms in the same shape — underlined on native, which has no `hover:`.
+
+  **Fixes a defect in the web `Button`:** it never set `type`, so it defaulted to `submit` and any `Button` inside a `form` submitted it on click. It now defaults to `type="button"`, and a caller passing `type="submit"` still wins.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/tailwind-preset@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes
