@@ -1,5 +1,12 @@
 # @atlure/ui-web
 
+## 0.5.0
+
+### Patch Changes
+
+- Updated dependencies [[`bead6ab`](https://github.com/simpxlify/atlure-ui/commit/bead6ab0c6a1563a1f62a0d89a05c35ea7f71cfa)]:
+  - @atlure/tailwind-preset@0.5.0
+
 ## 0.4.0
 
 ### Patch Changes
