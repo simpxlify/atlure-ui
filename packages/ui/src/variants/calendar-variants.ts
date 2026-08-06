@@ -1,0 +1,26 @@
+export const calendarContainerClassName = "w-full px-md";
+export const calendarHeaderClassName = "flex-row items-center justify-between py-md";
+export const calendarMonthLabelClassName = "text-base font-medium text-foreground";
+export const calendarNavButtonClassName = "px-md py-sm";
+export const calendarWeekdayRowClassName = "flex-row";
+export const calendarWeekdayCellClassName = "flex-1 items-center py-xs";
+export const calendarWeekdayLabelClassName = "text-xs uppercase text-muted-foreground";
+export const calendarWeekRowClassName = "flex-row";
+export const calendarDayCellClassName =
+  "flex-1 aspect-square items-center justify-center rounded-full";
+export const calendarDayCellSelectedClassName = "bg-primary";
+export const calendarDayCellInRangeClassName = "rounded-none bg-primary/20";
+export const calendarDayCellRangeStartClassName = "rounded-l-full rounded-r-none bg-primary";
+export const calendarDayCellRangeEndClassName = "rounded-l-none rounded-r-full bg-primary";
+export const calendarDayCellDisabledClassName = "opacity-40";
+export const calendarDayLabelClassName = "text-sm text-foreground";
+export const calendarDayLabelOutsideMonthClassName = "text-muted-foreground/50";
+export const calendarDayLabelSelectedClassName = "text-primary-foreground";
+export const calendarMarkerDotClassName = "absolute bottom-1 h-1 w-1 rounded-full bg-primary";
+export const dateRangePickerContainerClassName = "w-full";
+export const dateRangePickerSummaryClassName = "px-md pb-md text-sm text-foreground";
+export const timePickerBodyClassName = "flex-row py-md";
+export const timePickerColumnClassName = "flex-1";
+export const timePickerOptionClassName = "items-center py-sm";
+export const timePickerOptionSelectedClassName = "bg-primary/10";
+export const timePickerOptionLabelClassName = "text-base text-foreground";
