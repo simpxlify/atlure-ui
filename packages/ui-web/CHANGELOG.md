@@ -1,5 +1,20 @@
 # @atlure/ui-web
 
+## 0.6.1
+
+### Patch Changes
+
+- [#93](https://github.com/simpxlify/atlure-ui/pull/93) [`4aff69e`](https://github.com/simpxlify/atlure-ui/commit/4aff69ee704be592cbd10bcc733709dd35b165c3) Thanks [@simpxlify](https://github.com/simpxlify)! - chore(ui-web): drop `@radix-ui/react-accordion` from runtime dependencies.
+
+  Ticket 042 replaced the Radix-based Accordion with a native `<details>` implementation for SEO reasons, so the runtime dependency has been dead code since 0.6.0. Removing it shrinks the install size and removes one third-party surface from the consumer graph.
+
+- [#92](https://github.com/simpxlify/atlure-ui/pull/92) [`4ff39e8`](https://github.com/simpxlify/atlure-ui/commit/4ff39e87127947e607bac31f7923cc2b13105d34) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(ui-web): expose `themeScript` and helpers via `@atlure/ui-web/theme-script` subpath.
+
+  The main barrel eagerly evaluates `ThemeProvider`, which calls `createContext(...)` at module scope and blows up in React Server Components. The `themeScript` string is now reachable via a dedicated subpath entry that is safe to import from a Next 16 `app/layout.tsx` (server component) without pulling any client-only surface. Same exports (`themeScript`, `THEME_STORAGE_KEY`, `THEME_CLASS`, `readStoredTheme`, `systemTheme`, `resolveTheme`, `applyThemeClass`, `applyStoredTheme`, `Theme`, `ResolvedTheme`) — the main barrel keeps re-exporting them unchanged.
+
+- Updated dependencies []:
+  - @atlure/tailwind-preset@0.6.1
+
 ## 0.6.0
 
 ### Minor Changes

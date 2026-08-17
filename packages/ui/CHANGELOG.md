@@ -1,5 +1,14 @@
 # @atlure/ui
 
+## 0.6.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/icons@0.6.1
+  - @atlure/tokens@0.6.1
+  - @atlure/types@0.6.1
+
 ## 0.6.0
 
 ### Minor Changes
