@@ -1,5 +1,36 @@
 # @atlure/ui-web
 
+## 0.6.0
+
+### Minor Changes
+
+- [#87](https://github.com/simpxlify/atlure-ui/pull/87) [`c55f2ac`](https://github.com/simpxlify/atlure-ui/commit/c55f2ac2a98344a9f2b1cf5d3f074e9e70af4283) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(ui-web): IconButton mirroring the native @atlure/ui counterpart (ticket 041).
+
+  Adds a square `<button>` at `size="icon"` from the shared button recipe with a required `aria-label`, spinner-swap `isLoading` state (also flips `aria-busy` and `disabled`), and the same `type="button"` default the wave-6 form-submit fix already applied to `Button`. Also adds Badge unit tests and a Storybook page for the icon variant alongside the existing Button and Badge stories.
+
+- [#88](https://github.com/simpxlify/atlure-ui/pull/88) [`42d1f98`](https://github.com/simpxlify/atlure-ui/commit/42d1f98186ad9d38c738e9d5ee004b2a0551105c) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(ui-web): SEO-friendly Accordion, Separator, and CardTitle heading level (ticket 042).
+
+  - `Accordion` rewritten off `@radix-ui/react-accordion` onto a custom disclosure implementation that keeps every `AccordionContent` mounted in the DOM regardless of state — the marketing site's FAQ answers are the source for `FAQPage` structured data, so they must be crawlable even when collapsed. Collapsed content is hidden from users and the a11y tree via the `hidden` attribute; `aria-expanded` / `aria-controls` wired; keyboard support for Enter/Space toggle and Arrow / Home / End trigger navigation.
+  - `CardTitle` gains an `as` prop (`h1`–`h6`) so callers can pick the heading level for the page outline without dropping `asChild`.
+  - `Separator` renders `<hr role="separator">` with horizontal and vertical orientation, exposed for FAQ / feature-card list dividers.
+
+- [#89](https://github.com/simpxlify/atlure-ui/pull/89) [`b89bac9`](https://github.com/simpxlify/atlure-ui/commit/b89bac9b78d2984531d1f4629ff80fe6a025098b) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(ui-web): layout primitives — Section, Grid, Prose, VisuallyHidden, Row (ticket 044).
+
+  Adds the primitives the city-per-page marketing surface needs: `Section` (vertical rhythm + `tone` tokens + `as` for correct sectioning element), `Grid` (responsive `cols` prop translating `{ base: 1, md: 3 }` into `grid-cols-1 md:grid-cols-3`), `Prose` (typography wrapper for terms / privacy / help articles, tokenised without a Tailwind typography plugin), and `VisuallyHidden` (clip-path skip-link helper that keeps children in the DOM and a11y tree). `Container` gains the `size` variant (`prose` / `default` / `wide`). `Row` added as a horizontal `Stack` shortcut.
+
+- [#90](https://github.com/simpxlify/atlure-ui/pull/90) [`f54782c`](https://github.com/simpxlify/atlure-ui/commit/f54782c6a9049a513311b8be46a79510e2aacbd9) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(ui-web): ThemeProvider, dark-mode blocking script, feedback states (ticket 045).
+
+  - `ThemeProvider` reads a persisted preference (or `prefers-color-scheme`), exposes `theme` / `resolvedTheme` / `setTheme` via `useTheme`, and writes the choice to `localStorage`. Reacts to system-preference changes when the stored value is `system`.
+  - `themeScript` — a blocking inline snippet exported as a string. Consuming apps inject it into `<head>` so the `dark` class lands on `<html>` before first paint, killing the flash-of-light. `atlure-web` picks this up in ticket 095.
+  - `ThemeToggle` — button with an `aria-label` that flips with the target state and `aria-pressed` reflecting the current mode.
+  - `Skeleton`, `EmptyState`, `ErrorState` — web render layers matching the native family from wave-6 PR #65.
+  - README documents the token CSS import path and the blocking-script wiring.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/tailwind-preset@0.6.0
+
 ## 0.5.0
 
 ### Patch Changes
