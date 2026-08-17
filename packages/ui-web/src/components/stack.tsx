@@ -20,3 +20,9 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
     />
   );
 });
+
+export type RowProps = Omit<StackProps, 'direction'>;
+
+export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(props, ref) {
+  return <Stack ref={ref} direction="row" {...props} />;
+});
