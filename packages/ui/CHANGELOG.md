@@ -1,5 +1,20 @@
 # @atlure/ui
 
+## 0.6.0
+
+### Minor Changes
+
+- [#86](https://github.com/simpxlify/atlure-ui/pull/86) [`5ad1b63`](https://github.com/simpxlify/atlure-ui/commit/5ad1b63a86552c6eb9a90d840aa3264a4c89adb0) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(ui): Calendar, DateRangePicker and TimePicker (ticket 040).
+
+  Native components composing `@atlure/ui`'s Sheet for the TimePicker and using `Intl` (no `moment`, no `date-fns`) for locale-aware month grids, weekday order, and full-date accessibility labels. ISO `YYYY-MM-DD` at the boundary — no `Date` instances in props or callbacks. `DateRangePicker` enforces `minNights`/`maxNights` and rejects invalid two-tap sequences without disturbing the committed range.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/icons@0.6.0
+  - @atlure/tokens@0.6.0
+  - @atlure/types@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes
