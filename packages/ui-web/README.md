@@ -36,6 +36,40 @@ module.exports = {
 
 Dark mode is class-based: put `dark` on `<html>`.
 
+### CSS custom properties
+
+Import the generated token CSS once, at the top of the consuming app's root stylesheet. Both light
+and dark palettes live in the same file — the `dark` class on `<html>` swaps them.
+
+```css
+@import '@atlure/tokens/theme.css';
+```
+
+### Preventing the light-flash on first paint
+
+The Tailwind preset uses `darkMode: "class"`, so a server-rendered marketing page needs the `dark`
+class set **before hydration** — otherwise it paints light and switches. `@atlure/ui-web` exports a
+blocking script snippet that does this synchronously. Inject it in `<head>` before any stylesheet:
+
+```tsx
+import { themeScript } from '@atlure/ui-web';
+
+<head>
+  <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+</head>
+```
+
+Then wrap the tree in `<ThemeProvider>` and expose a `<ThemeToggle>` (or roll your own via
+`useTheme()`).
+
+```tsx
+import { ThemeProvider, ThemeToggle } from '@atlure/ui-web';
+
+<ThemeProvider>
+  <ThemeToggle />
+</ThemeProvider>
+```
+
 ## Usage
 
 ```tsx
