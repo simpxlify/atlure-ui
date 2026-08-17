@@ -8,11 +8,15 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement>, Containe
 }
 
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(function Container(
-  { className, width, asChild = false, ...props },
+  { className, width, size, asChild = false, ...props },
   ref,
 ) {
   const Component = asChild ? Slot : 'div';
   return (
-    <Component ref={ref} className={cn(containerVariants({ width }), className)} {...props} />
+    <Component
+      ref={ref}
+      className={cn(containerVariants({ width, size }), className)}
+      {...props}
+    />
   );
 });
