@@ -35,6 +35,16 @@
         "default": "./dist/variants/index.cjs"
       }
     },
+    "./theme-script": {
+      "import": {
+        "types": "./dist/theme/theme-script.d.ts",
+        "default": "./dist/theme/theme-script.js"
+      },
+      "require": {
+        "types": "./dist/theme/theme-script.d.cts",
+        "default": "./dist/theme/theme-script.cjs"
+      }
+    },
     "./package.json": "./package.json"
   },
   "files": [
