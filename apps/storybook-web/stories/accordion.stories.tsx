@@ -23,6 +23,36 @@ const faq = [
     question: 'Is my pet insured?',
     answer: 'Every booking made through Atlure includes veterinary cover for the whole stay.',
   },
+  {
+    value: 'meet-and-greet',
+    question: 'Can I meet the sitter first?',
+    answer: 'Yes. Every sitter offers a free meet-and-greet before the first booking is confirmed.',
+  },
+  {
+    value: 'vet-checks',
+    question: 'How are sitters vetted?',
+    answer: 'Identity check, in-home visit and reference calls with two prior owners.',
+  },
+  {
+    value: 'multiple-pets',
+    question: 'Can I book for more than one pet?',
+    answer: 'Yes — add each pet from your profile before you request the booking.',
+  },
+  {
+    value: 'photos',
+    question: 'Do I get updates while I am away?',
+    answer: 'Sitters send a photo update at least once a day for every booking longer than 24 hours.',
+  },
+  {
+    value: 'refunds',
+    question: 'What if the sitter cancels?',
+    answer: 'You receive a full refund and we surface at least three replacement sitters within an hour.',
+  },
+  {
+    value: 'contact',
+    question: 'How do I contact support?',
+    answer: 'Reply to any booking email — the reply lands directly in the Atlure support inbox, 07:00 to 22:00 CET.',
+  },
 ];
 
 function renderFaq(args: AccordionProps) {

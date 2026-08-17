@@ -16,6 +16,18 @@ describe('When rendering a Card', () => {
     expect(screen.getByRole('heading', { name: /overnight stays/i })).toBeInTheDocument();
   });
 
+  it('lets the caller choose the heading level with the as prop', () => {
+    render(
+      <Card>
+        <CardHeader>
+          <CardTitle as="h2">Overnight stays</CardTitle>
+        </CardHeader>
+      </Card>,
+    );
+
+    expect(screen.getByRole('heading', { level: 2, name: /overnight stays/i })).toBeInTheDocument();
+  });
+
   it('lets the caller choose the heading level through asChild', () => {
     render(
       <Card>

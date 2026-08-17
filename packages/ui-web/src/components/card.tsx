@@ -32,15 +32,18 @@ export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
   },
 );
 
+export type CardTitleHeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
   asChild?: boolean;
+  as?: CardTitleHeadingLevel;
 }
 
 export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(function CardTitle(
-  { className, asChild = false, ...props },
+  { className, asChild = false, as = 'h3', ...props },
   ref,
 ) {
-  const Component = asChild ? Slot : 'h3';
+  const Component = asChild ? Slot : as;
   return <Component ref={ref} className={cn(cardTitleClassName, className)} {...props} />;
 });
 
