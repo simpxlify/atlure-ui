@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { badgeVariants } from "../../variants/badge-variants";
-import { UrgencyBadge, urgencyBadgeVariant } from "./urgency-badge";
+import { DEFAULT_URGENCY_LABELS, UrgencyBadge, urgencyBadgeVariant } from "./urgency-badge";
 
 describe("When an urgency badge renders", () => {
   it("paints high as destructive and low as secondary", () => {
@@ -20,6 +20,12 @@ describe("When an urgency badge renders", () => {
     render(<UrgencyBadge label="Needs a sitter today" urgency="high" />);
 
     expect(screen.getByText("Needs a sitter today")).toBeTruthy();
+  });
+
+  it("falls back to the default label for the urgency when none is supplied", () => {
+    render(<UrgencyBadge urgency="high" />);
+
+    expect(screen.getByText(DEFAULT_URGENCY_LABELS.high)).toBeTruthy();
   });
 });
 

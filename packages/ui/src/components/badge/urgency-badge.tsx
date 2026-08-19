@@ -11,11 +11,23 @@ export const urgencyBadgeVariant: Record<Urgency, BadgeVariant> = {
   high: "destructive",
 };
 
+export const DEFAULT_URGENCY_LABELS: Record<Urgency, string> = {
+  low: "Low priority",
+  medium: "Normal",
+  high: "High priority",
+};
+
 export interface UrgencyBadgeProps extends Omit<BadgeProps, "label" | "variant"> {
   urgency: Urgency;
-  label: string;
+  label?: string;
 }
 
-export function UrgencyBadge({ urgency, ...badgeProps }: UrgencyBadgeProps) {
-  return <Badge variant={urgencyBadgeVariant[urgency]} {...badgeProps} />;
+export function UrgencyBadge({ urgency, label, ...badgeProps }: UrgencyBadgeProps) {
+  return (
+    <Badge
+      variant={urgencyBadgeVariant[urgency]}
+      label={label ?? DEFAULT_URGENCY_LABELS[urgency]}
+      {...badgeProps}
+    />
+  );
 }

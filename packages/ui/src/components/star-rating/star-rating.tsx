@@ -26,10 +26,11 @@ export function starFillAt(starNumber: number, value: number): StarFill {
 }
 
 export interface StarRatingProps extends Omit<ViewProps, "children"> {
-  value: number;
+  value: number | null;
   max?: number;
   size?: StarRatingSize;
   showValue?: boolean;
+  count?: number;
   isInteractive?: boolean;
   onChange?: (value: number) => void;
   rateAccessibilityLabel?: (starNumber: number, max: number) => string;
@@ -40,6 +41,7 @@ export function StarRating({
   max = 5,
   size = "md",
   showValue = false,
+  count,
   isInteractive = false,
   onChange,
   rateAccessibilityLabel = (starNumber, total) => `Rate ${starNumber} out of ${total}`,
@@ -49,15 +51,18 @@ export function StarRating({
 }: StarRatingProps) {
   const starNumbers = Array.from({ length: max }, (_, index) => index + 1);
   const pixelSize = starRatingIconSize[size];
+  const hasValue = value !== null;
+  const effectiveValue = hasValue ? value : 0;
+  const showCount = hasValue && typeof count === "number" && count >= 0;
 
   return (
     <View
-      accessibilityLabel={accessibilityLabel ?? `${value} out of ${max}`}
+      accessibilityLabel={accessibilityLabel ?? (hasValue ? `${value} out of ${max}` : "Not rated")}
       className={cn(starRatingClassName, className)}
       {...viewProps}
     >
       {starNumbers.map((starNumber) => {
-        const fill = starFillAt(starNumber, value);
+        const fill = starFillAt(starNumber, effectiveValue);
         const isPainted = fill !== "empty";
         const StarGlyph = fill === "half" ? StarHalf : Star;
 
@@ -90,8 +95,11 @@ export function StarRating({
           </Pressable>
         );
       })}
-      {showValue ? (
+      {showValue && hasValue ? (
         <Text className={starRatingValueVariants({ size })}>{value.toFixed(1)}</Text>
+      ) : null}
+      {showCount ? (
+        <Text className={starRatingValueVariants({ size })}>{`(${count})`}</Text>
       ) : null}
     </View>
   );

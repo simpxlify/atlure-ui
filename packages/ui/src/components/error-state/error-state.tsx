@@ -12,19 +12,21 @@ import { Button } from "../button/button";
 import { Text } from "../text/text";
 
 export interface ErrorStateProps extends Omit<ViewProps, "children"> {
-  title: string;
-  message: string;
-  retryLabel: string;
+  title?: string;
+  message?: string;
+  retryLabel?: string;
   onRetry: () => void;
   icon?: ReactNode;
+  retryTestID?: string;
 }
 
 export function ErrorState({
-  title,
+  title = "Something went wrong",
   message,
-  retryLabel,
+  retryLabel = "Retry",
   onRetry,
   icon,
+  retryTestID,
   className,
   ...viewProps
 }: ErrorStateProps) {
@@ -34,11 +36,13 @@ export function ErrorState({
       <Text accessibilityRole="header" variant="h3" className={stateTextClassName}>
         {title}
       </Text>
-      <Text variant="bodySm" tone="muted" className={stateTextClassName}>
-        {message}
-      </Text>
+      {message !== undefined ? (
+        <Text variant="bodySm" tone="muted" className={stateTextClassName}>
+          {message}
+        </Text>
+      ) : null}
       <View className={stateActionClassName}>
-        <Button variant="secondary" label={retryLabel} onPress={onRetry} />
+        <Button variant="secondary" label={retryLabel} onPress={onRetry} testID={retryTestID} />
       </View>
     </View>
   );

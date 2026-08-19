@@ -66,6 +66,31 @@ describe("When the search field is empty", () => {
   });
 });
 
+describe("When SearchBar runs uncontrolled with defaultValue and onCommit", () => {
+  it("maintains its own draft and commits once after debounce", () => {
+    const onCommit = vi.fn();
+
+    render(
+      <SearchBar
+        accessibilityLabel="Search sitters"
+        clearAccessibilityLabel="Clear search"
+        defaultValue=""
+        onCommit={onCommit}
+      />,
+    );
+
+    const control = screen.getByRole("textbox");
+
+    fireEvent.change(control, { target: { value: "Por" } });
+    fireEvent.change(control, { target: { value: "Porto" } });
+    vi.advanceTimersByTime(300);
+
+    expect(onCommit).toHaveBeenCalledTimes(1);
+    expect(onCommit).toHaveBeenCalledWith("Porto");
+    expect((control as HTMLInputElement).value).toBe("Porto");
+  });
+});
+
 describe("When the clear affordance is pressed", () => {
   it("empties the field and notifies the debounced caller immediately", () => {
     renderSearchBar("Lisbon");
