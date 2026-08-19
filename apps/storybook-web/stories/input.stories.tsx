@@ -1,4 +1,4 @@
-import { Input, Stack } from '@atlure/ui-web';
+import { FormField, Input, Stack } from '@atlure/ui-web';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
@@ -6,7 +6,6 @@ const meta = {
   component: Input,
   tags: ['autodocs'],
   args: {
-    label: 'Email',
     placeholder: 'you@example.com',
   },
   argTypes: {
@@ -19,6 +18,11 @@ const meta = {
       </div>
     ),
   ],
+  render: (args) => (
+    <FormField label="Email">
+      <Input {...args} />
+    </FormField>
+  ),
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -28,21 +32,27 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const WithHint: Story = {
-  args: {
-    hint: 'We only use this to confirm your booking',
-  },
+  render: (args) => (
+    <FormField label="Email" helperText="We only use this to confirm your booking">
+      <Input {...args} />
+    </FormField>
+  ),
 };
 
 export const Invalid: Story = {
   args: {
     defaultValue: 'not-an-email',
-    errorMessage: 'Enter a valid email address',
   },
+  render: (args) => (
+    <FormField label="Email" error="Enter a valid email address">
+      <Input {...args} />
+    </FormField>
+  ),
 };
 
 export const Disabled: Story = {
   args: {
-    disabled: true,
+    isDisabled: true,
     defaultValue: 'owner@atlure.eu',
   },
 };
@@ -57,17 +67,23 @@ export const ReadOnly: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <Stack gap="md">
-      <Input {...args} size="sm" label="Small" />
-      <Input {...args} size="md" label="Medium" />
-      <Input {...args} size="lg" label="Large" />
+      <FormField label="Small">
+        <Input {...args} size="sm" />
+      </FormField>
+      <FormField label="Medium">
+        <Input {...args} size="md" />
+      </FormField>
+      <FormField label="Large">
+        <Input {...args} size="lg" />
+      </FormField>
     </Stack>
   ),
 };
 
 export const WithoutVisibleLabel: Story = {
   args: {
-    label: undefined,
     'aria-label': 'Search sitters by city',
     placeholder: 'Search sitters by city',
   },
+  render: (args) => <Input {...args} />,
 };
