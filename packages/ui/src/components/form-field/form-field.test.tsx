@@ -86,3 +86,25 @@ describe("When a form field is disabled", () => {
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-disabled", "true");
   });
 });
+
+describe("When a form field is rendered in inline variant", () => {
+  it("renders an internal input wired to the label and error, without children", () => {
+    render(
+      <FormField
+        variant="inline"
+        label="Email"
+        error="Required"
+        value="hi@example.com"
+        placeholder="name@example.com"
+      />,
+    );
+
+    const control = screen.getByRole("textbox");
+
+    expect(control).toHaveAccessibleName("Email");
+    expect(control).toHaveAttribute("aria-invalid", "true");
+    expect(control).toHaveAccessibleDescription("Required");
+    expect(control).toHaveAttribute("placeholder", "name@example.com");
+    expect((control as HTMLInputElement).value).toBe("hi@example.com");
+  });
+});
