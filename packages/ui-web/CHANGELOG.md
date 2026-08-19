@@ -1,5 +1,12 @@
 # @atlure/ui-web
 
+## 0.7.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/tailwind-preset@0.7.0
+
 ## 0.6.1
 
 ### Patch Changes
