@@ -1,6 +1,6 @@
 {
   "name": "@atlure/icons",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Atlure icon set: one lucide import path for React Native and the DOM, resolved by export condition",
   "license": "MIT",
   "author": "David Moreira",

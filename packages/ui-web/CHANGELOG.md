@@ -1,5 +1,16 @@
 # @atlure/ui-web
 
+## 0.9.0
+
+### Minor Changes
+
+- [#99](https://github.com/simpxlify/atlure-ui/pull/99) [`b1d8a42`](https://github.com/simpxlify/atlure-ui/commit/b1d8a421f23adbf92bccc0cf68cfc5bc26ea50bb) Thanks [@simpxlify](https://github.com/simpxlify)! - Add DOM Input, Textarea, Label, and FormField (container + inline variants) mirroring the native `@atlure/ui` API.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/tailwind-preset@0.9.0
+
 ## 0.8.0
 
 ### Patch Changes
