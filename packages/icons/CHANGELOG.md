@@ -1,5 +1,12 @@
 # @atlure/icons
 
+## 0.8.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/tokens@0.8.0
+
 ## 0.7.0
 
 ### Patch Changes
