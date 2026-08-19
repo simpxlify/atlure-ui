@@ -1,5 +1,20 @@
 # @atlure/ui
 
+## 0.8.0
+
+### Minor Changes
+
+- [#97](https://github.com/simpxlify/atlure-ui/pull/97) [`ece0ff3`](https://github.com/simpxlify/atlure-ui/commit/ece0ff3431d80fc15cd59883d6c141410b44b6e4) Thanks [@simpxlify](https://github.com/simpxlify)! - EmptyState gains an optional `preset` prop (`"no-results" | "no-filters" | "no-radius"`) plus an exported `DEFAULT_EMPTY_STATE_COPY` map, so callers can drop in default copy while still overriding individual strings.
+
+- [#97](https://github.com/simpxlify/atlure-ui/pull/97) [`ece0ff3`](https://github.com/simpxlify/atlure-ui/commit/ece0ff3431d80fc15cd59883d6c141410b44b6e4) Thanks [@simpxlify](https://github.com/simpxlify)! - FormField gains an optional `variant="inline"` that renders its own Input from spread props, so consumers no longer need to wire a child control by hand.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @atlure/icons@0.8.0
+  - @atlure/tokens@0.8.0
+  - @atlure/types@0.8.0
+
 ## 0.7.0
 
 ### Minor Changes
