@@ -1,4 +1,5 @@
 import { iconSize, Search, X } from "@atlure/icons";
+import { useState } from "react";
 import { Pressable } from "react-native";
 
 import { touchTargetHitSlop } from "../../lib/touch-target";
@@ -8,42 +9,57 @@ import { useDebouncedCallback } from "./hooks/use-debounced-callback";
 
 export interface SearchBarProps
   extends Omit<InputProps, "leadingIcon" | "trailingIcon" | "isMultiline" | "value"> {
-  value: string;
-  onChangeText: (value: string) => void;
+  value?: string;
+  defaultValue?: string;
+  onChangeText?: (value: string) => void;
   onChangeDebounced?: (value: string) => void;
+  onCommit?: (value: string) => void;
   debounceMs?: number;
   clearAccessibilityLabel: string;
 }
 
 export function SearchBar({
   value,
+  defaultValue,
   onChangeText,
   onChangeDebounced,
+  onCommit,
   debounceMs = 300,
   clearAccessibilityLabel,
   ...inputProps
 }: SearchBarProps) {
-  const { schedule, flush } = useDebouncedCallback(onChangeDebounced, debounceMs);
+  const isUncontrolled = defaultValue !== undefined;
+  const [draft, setDraft] = useState(defaultValue ?? "");
+  const currentValue = isUncontrolled ? draft : (value ?? "");
+
+  const debouncedTarget = isUncontrolled ? onCommit : onChangeDebounced;
+  const { schedule, flush } = useDebouncedCallback(debouncedTarget, debounceMs);
 
   const handleChangeText = (nextValue: string) => {
-    onChangeText(nextValue);
+    if (isUncontrolled) {
+      setDraft(nextValue);
+    }
+    onChangeText?.(nextValue);
     schedule(nextValue);
   };
 
   const handleClear = () => {
-    onChangeText("");
+    if (isUncontrolled) {
+      setDraft("");
+    }
+    onChangeText?.("");
     flush("");
   };
 
   return (
     <Input
-      value={value}
+      value={currentValue}
       onChangeText={handleChangeText}
       returnKeyType="search"
       clearButtonMode="never"
       leadingIcon={<Search size={iconSize.md} className={searchBarIconClassName} />}
       trailingIcon={
-        value.length > 0 ? (
+        currentValue.length > 0 ? (
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={clearAccessibilityLabel}

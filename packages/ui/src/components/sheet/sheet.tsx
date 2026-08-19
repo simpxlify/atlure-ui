@@ -27,21 +27,61 @@ import {
   SHEET_PAN_ACTIVATION_DISTANCE,
 } from "./utils";
 
+export type SheetVariant = "snap" | "modal-slide";
+
 export interface SheetProps {
   isOpen: boolean;
   onClose: () => void;
-  backdropAccessibilityLabel: string;
+  backdropAccessibilityLabel?: string;
   accessibilityLabel?: string;
   snapPoints?: readonly number[];
   bottomInset?: number;
+  variant?: SheetVariant;
   className?: string;
   children: ReactNode;
 }
 
-export function Sheet({
+export function Sheet(props: SheetProps) {
+  if (props.variant === "modal-slide") {
+    return <ModalSlideSheet {...props} />;
+  }
+
+  return <SnapSheet {...props} />;
+}
+
+function ModalSlideSheet({
   isOpen,
   onClose,
-  backdropAccessibilityLabel,
+  backdropAccessibilityLabel = "Close sheet",
+  accessibilityLabel,
+  className,
+  children,
+}: SheetProps) {
+  return (
+    <Modal visible={isOpen} transparent animationType="slide" onRequestClose={onClose}>
+      <View className={sheetContainerClassName}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={backdropAccessibilityLabel}
+          className={sheetBackdropClassName}
+          onPress={onClose}
+        />
+        <View
+          accessibilityViewIsModal
+          accessibilityLabel={accessibilityLabel}
+          className={cn(sheetContentClassName, className)}
+        >
+          {children}
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+function SnapSheet({
+  isOpen,
+  onClose,
+  backdropAccessibilityLabel = "Close sheet",
   accessibilityLabel,
   snapPoints = DEFAULT_SHEET_SNAP_POINTS,
   bottomInset = 0,

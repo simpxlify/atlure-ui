@@ -88,6 +88,26 @@ describe("When the Android hardware back button is pressed", () => {
   });
 });
 
+describe("When the modal-slide variant is chosen", () => {
+  it("renders its children without pan-drag scaffolding", async () => {
+    const onClose = vi.fn();
+
+    await act(async () => {
+      render(
+        <Sheet isOpen variant="modal-slide" onClose={onClose}>
+          <span>Modal body</span>
+        </Sheet>,
+      );
+    });
+
+    expect(screen.getByText("Modal body")).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Close sheet" }));
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe("When the reduced-motion setting is on", () => {
   it("animates with a duration of zero", async () => {
     vi.spyOn(AccessibilityInfo, "isReduceMotionEnabled").mockResolvedValue(true);

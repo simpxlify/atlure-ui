@@ -76,3 +76,20 @@ describe("When a rating shows its numeric value", () => {
     expect(screen.getByText("4.5")).toBeTruthy();
   });
 });
+
+describe("When a rating has no value", () => {
+  it("renders every star empty and skips the count", () => {
+    render(<StarRating max={5} value={null} count={12} />);
+
+    expect(screen.getAllByTestId("star-empty")).toHaveLength(5);
+    expect(screen.queryByText("(12)")).toBeNull();
+  });
+});
+
+describe("When a rating carries a review count", () => {
+  it("renders the count next to the stars", () => {
+    render(<StarRating value={4.5} count={128} />);
+
+    expect(screen.getByText("(128)")).toBeTruthy();
+  });
+});
