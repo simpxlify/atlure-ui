@@ -1,14 +1,26 @@
-import { forwardRef, type ChangeEvent, type InputHTMLAttributes } from 'react';
+import {
+  forwardRef,
+  type ChangeEvent,
+  type TextareaHTMLAttributes,
+} from 'react';
 import { cn } from '../lib/cn';
-import { inputVariants, type InputVariantProps } from '../variants';
+import {
+  inputVariants,
+  textareaVariants,
+  type InputVariantProps,
+  type TextareaRows,
+} from '../variants';
 import { useFormFieldControl } from './form-field-context';
 
-type NativeInputProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'disabled' | 'required' | 'aria-invalid' | 'aria-labelledby' | 'aria-describedby'
+type NativeTextareaProps = Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  'disabled' | 'required' | 'aria-invalid' | 'aria-labelledby' | 'aria-describedby'
 >;
 
-export interface InputProps extends NativeInputProps, Omit<InputVariantProps, 'isInvalid'> {
+export interface TextareaProps
+  extends NativeTextareaProps,
+    Pick<InputVariantProps, 'size'> {
+  rows?: TextareaRows;
   isDisabled?: boolean;
   isInvalid?: boolean;
   isRequired?: boolean;
@@ -17,10 +29,11 @@ export interface InputProps extends NativeInputProps, Omit<InputVariantProps, 'i
   testID?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
   {
     className,
-    size,
+    size = 'lg',
+    rows = 3,
     isDisabled,
     isInvalid,
     isRequired,
@@ -40,15 +53,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const resolvedRequired = isRequired ?? field?.isRequired ?? false;
   const resolvedId = id ?? field?.id;
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
     onChangeText?.(event.target.value);
     onChange?.(event);
   }
 
   return (
-    <input
+    <textarea
       ref={ref}
       id={resolvedId}
+      rows={rows}
       disabled={resolvedDisabled}
       aria-disabled={resolvedDisabled || undefined}
       aria-invalid={resolvedInvalid || undefined}
@@ -58,7 +72,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       aria-describedby={field?.describedBy}
       data-testid={testID}
       onChange={handleChange}
-      className={cn(inputVariants({ size, isInvalid: resolvedInvalid }), className)}
+      className={cn(
+        inputVariants({ size, isInvalid: resolvedInvalid }),
+        textareaVariants({ rows }),
+        className,
+      )}
       {...rest}
     />
   );

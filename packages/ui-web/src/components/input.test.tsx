@@ -1,48 +1,66 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { useState } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 import { Input } from './input';
 
-describe('When rendering an Input with a label', () => {
-  it('associates the label with the control and accepts typing', async () => {
-    render(<Input label="Email" />);
+describe('When an Input is uncontrolled', () => {
+  it('accepts typing and reports each change through onChangeText', async () => {
+    const onChangeText = vi.fn();
+    render(<Input accessibilityLabel="Search sitters" onChangeText={onChangeText} />);
 
-    const field = screen.getByLabelText(/email/i);
-    await userEvent.type(field, 'sitter@atlure.eu');
+    const field = screen.getByLabelText('Search sitters');
+    await userEvent.type(field, 'Lisbon');
 
-    expect(field).toHaveValue('sitter@atlure.eu');
-  });
-
-  it('describes the control with the hint', () => {
-    render(<Input label="Email" hint="We only use this to confirm your booking" />);
-
-    expect(screen.getByLabelText(/email/i)).toHaveAccessibleDescription(
-      /we only use this to confirm your booking/i,
-    );
+    expect(field).toHaveValue('Lisbon');
+    expect(onChangeText).toHaveBeenLastCalledWith('Lisbon');
   });
 });
 
-describe('When an Input has an error', () => {
-  it('marks the control invalid, announces the error and hides the hint', () => {
-    render(<Input label="Email" hint="Work address is fine" errorMessage="Enter a valid email" />);
+describe('When an Input is controlled', () => {
+  it('renders the value the caller provides', async () => {
+    function Controlled() {
+      const [value, setValue] = useState('Porto');
+      return (
+        <Input accessibilityLabel="City" value={value} onChangeText={setValue} />
+      );
+    }
+    render(<Controlled />);
 
-    const field = screen.getByLabelText(/email/i);
+    const field = screen.getByLabelText('City');
+    expect(field).toHaveValue('Porto');
 
-    expect(field).toHaveAttribute('aria-invalid', 'true');
-    expect(field).toHaveAccessibleDescription(/enter a valid email/i);
-    expect(screen.getByRole('alert')).toHaveTextContent(/enter a valid email/i);
-    expect(screen.queryByText(/work address is fine/i)).not.toBeInTheDocument();
+    await userEvent.clear(field);
+    await userEvent.type(field, 'Braga');
+    expect(field).toHaveValue('Braga');
   });
 });
 
 describe('When an Input is disabled', () => {
-  it('rejects typing', async () => {
-    render(<Input label="Email" disabled />);
+  it('rejects typing and announces the disabled state', async () => {
+    render(<Input accessibilityLabel="Email" isDisabled />);
 
-    const field = screen.getByLabelText(/email/i);
-    await userEvent.type(field, 'sitter@atlure.eu');
+    const field = screen.getByLabelText('Email');
+    await userEvent.type(field, 'nope');
 
     expect(field).toBeDisabled();
+    expect(field).toHaveAttribute('aria-disabled', 'true');
     expect(field).toHaveValue('');
+  });
+});
+
+describe('When an Input is invalid', () => {
+  it('announces the invalid state', () => {
+    render(<Input accessibilityLabel="Email" isInvalid />);
+
+    expect(screen.getByLabelText('Email')).toHaveAttribute('aria-invalid', 'true');
+  });
+});
+
+describe('When an Input is given a testID', () => {
+  it('maps it onto data-testid', () => {
+    render(<Input accessibilityLabel="Email" testID="signup-email" />);
+
+    expect(screen.getByTestId('signup-email')).toBe(screen.getByLabelText('Email'));
   });
 });
