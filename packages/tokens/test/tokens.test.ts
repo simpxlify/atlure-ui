@@ -11,6 +11,7 @@ import {
   controlHeight,
   textareaHeight,
   fontSize,
+  lineHeight,
   radius,
   semantic,
   spacing,
@@ -137,6 +138,29 @@ describe("generated artifact parity", () => {
     }
     for (const key of Object.keys(textareaHeight)) {
       assert.ok(preset.includes(`"textarea-${key}"`), `textareaHeight.${key}`);
+    }
+  });
+
+  it("derives every textareaHeight entry from lineHeight.base plus twice spacing.sm", () => {
+    const verticalPadding = spacing.sm * 2;
+    const expectedRows = [2, 3, 4, 6] as const;
+    for (const rows of expectedRows) {
+      const expected = lineHeight.base * rows + verticalPadding;
+      assert.equal(
+        textareaHeight[rows],
+        expected,
+        `textareaHeight.${rows} should equal ${expected}`,
+      );
+    }
+  });
+
+  it("exposes each textareaHeight row count in the preset as a rem value", () => {
+    const preset = readFileSync(presetFile, "utf8");
+    for (const [key, value] of Object.entries(textareaHeight)) {
+      assert.ok(
+        preset.includes(`"textarea-${key}": "${value / 16}rem"`),
+        `textarea-${key} rem value missing from preset`,
+      );
     }
   });
 

@@ -168,11 +168,13 @@ export const controlHeight = {
   icon: 40,
 } as const;
 
+const textareaVerticalPadding = spacing.sm * 2;
+
 export const textareaHeight = {
-  sm: 64,
-  md: 96,
-  lg: 112,
-  xl: 160,
+  2: lineHeight.base * 2 + textareaVerticalPadding,
+  3: lineHeight.base * 3 + textareaVerticalPadding,
+  4: lineHeight.base * 4 + textareaVerticalPadding,
+  6: lineHeight.base * 6 + textareaVerticalPadding,
 } as const;
 
 export const fontWeight = {

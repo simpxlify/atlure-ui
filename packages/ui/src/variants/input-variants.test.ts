@@ -59,9 +59,9 @@ describe("When an input carries an icon", () => {
 
 describe("When a textarea row count is resolved", () => {
   it("grows the minimum height with the row count", () => {
-    expect(textareaVariants({ rows: 2 })).toContain("min-h-textarea-sm");
-    expect(textareaVariants({ rows: 3 })).toContain("min-h-textarea-md");
-    expect(textareaVariants({ rows: 4 })).toContain("min-h-textarea-lg");
-    expect(textareaVariants({ rows: 6 })).toContain("min-h-textarea-xl");
+    expect(textareaVariants({ rows: 2 })).toContain("min-h-textarea-2");
+    expect(textareaVariants({ rows: 3 })).toContain("min-h-textarea-3");
+    expect(textareaVariants({ rows: 4 })).toContain("min-h-textarea-4");
+    expect(textareaVariants({ rows: 6 })).toContain("min-h-textarea-6");
   });
 });
