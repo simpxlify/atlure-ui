@@ -1,5 +1,11 @@
 # @atlure/types
 
+## 0.11.0
+
+### Minor Changes
+
+- [#106](https://github.com/simpxlify/atlure-ui/pull/106) [`f5eeac5`](https://github.com/simpxlify/atlure-ui/commit/f5eeac56c9f2a15fa9e351aa7e5cff7bb872bddf) Thanks [@simpxlify](https://github.com/simpxlify)! - Add request-invitation and booking-overdue to NotificationKind
+
 ## 0.10.0
 
 ### Minor Changes
