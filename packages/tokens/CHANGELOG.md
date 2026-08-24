@@ -1,5 +1,11 @@
 # @atlure/tokens
 
+## 0.11.0
+
+### Minor Changes
+
+- [#103](https://github.com/simpxlify/atlure-ui/pull/103) [`86a684c`](https://github.com/simpxlify/atlure-ui/commit/86a684cebf37bc1321edb2f8922fec5a2b81ca53) Thanks [@simpxlify](https://github.com/simpxlify)! - Add `textareaHeight` token group keyed by row count (2/3/4/6), derived from `lineHeight.base` plus twice `spacing.sm`. Textarea `rows` variant now consumes `min-h-textarea-{rows}` classes in place of the stopgap `min-h-16 / 24 / 28 / 40` (ui #66).
+
 ## 0.10.0
 
 ## 0.9.0
