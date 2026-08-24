@@ -10,6 +10,7 @@ export interface MessageThread {
 
 export interface Message {
   id: EntityId;
+  clientId?: string;
   threadId: EntityId;
   senderId: EntityId;
   body: string;
