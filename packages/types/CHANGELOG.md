@@ -1,5 +1,11 @@
 # @atlure/types
 
+## 0.10.0
+
+### Minor Changes
+
+- [#101](https://github.com/simpxlify/atlure-ui/pull/101) [`5cd5c72`](https://github.com/simpxlify/atlure-ui/commit/5cd5c72a9da629ae0aad8921aaae965271b96635) Thanks [@simpxlify](https://github.com/simpxlify)! - Add optional `clientId` to `Message` for reliable optimistic-send correlation (paw #90).
+
 ## 0.9.0
 
 ## 0.8.0
