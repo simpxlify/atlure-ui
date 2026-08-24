@@ -41,7 +41,9 @@ export type NotificationKind =
   | "booking-accepted"
   | "booking-declined"
   | "booking-cancelled"
+  | "booking-overdue"
   | "message-received"
+  | "request-invitation"
   | "review-received"
   | "tracking-started"
   | "tracking-ended";
