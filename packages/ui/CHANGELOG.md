@@ -1,5 +1,14 @@
 # @atlure/ui
 
+## 0.10.0
+
+### Patch Changes
+
+- Updated dependencies [[`5cd5c72`](https://github.com/simpxlify/atlure-ui/commit/5cd5c72a9da629ae0aad8921aaae965271b96635)]:
+  - @atlure/types@0.10.0
+  - @atlure/icons@0.10.0
+  - @atlure/tokens@0.10.0
+
 ## 0.9.0
 
 ### Patch Changes
