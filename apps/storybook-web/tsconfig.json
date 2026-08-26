@@ -2,10 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
+    "jsxImportSource": "nativewind",
     "noEmit": true,
     "declaration": false,
     "declarationMap": false,
-    "types": ["vite/client"]
+    "types": ["vite/client", "nativewind/types"]
   },
   "include": [".storybook", "stories"]
 }

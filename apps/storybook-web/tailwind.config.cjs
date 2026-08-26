@@ -1,11 +1,12 @@
-const atlurePreset = require('@atlure/tailwind-preset');
+const atlurePreset = require("@atlure/tailwind-preset");
 
 module.exports = {
   presets: [atlurePreset],
-  darkMode: 'class',
+  darkMode: "class",
   content: [
-    './stories/**/*.{ts,tsx}',
-    './.storybook/**/*.{ts,tsx}',
-    '../../packages/ui-web/src/**/*.{ts,tsx}',
+    "./stories/**/*.{ts,tsx}",
+    "./.storybook/**/*.{ts,tsx}",
+    "../../packages/ui-web/src/**/*.{ts,tsx}",
+    "../../packages/ui/src/**/*.{ts,tsx}",
   ],
 };
