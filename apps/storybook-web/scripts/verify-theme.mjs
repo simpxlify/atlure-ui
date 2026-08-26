@@ -2,6 +2,7 @@ import { withStorybookPage } from './chrome-harness.mjs';
 
 const atlurePrimary = 'rgb(234, 88, 12)';
 const probeStoryId = 'web-button--primary';
+const nativeProbeStoryId = 'native-button--primary';
 
 const readSurface = `JSON.stringify({
   documentClass: document.documentElement.className,
@@ -10,18 +11,26 @@ const readSurface = `JSON.stringify({
   buttonBackground: getComputedStyle(document.querySelector('#storybook-root button')).backgroundColor,
 })`;
 
-const { light, dark } = await withStorybookPage(async ({ openStory, evaluate }) => {
+const readNativeSurface = `JSON.stringify({
+  buttonBackground: getComputedStyle(document.querySelector('#storybook-root [role="button"]')).backgroundColor,
+})`;
+
+const { light, dark, native } = await withStorybookPage(async ({ openStory, evaluate }) => {
   await openStory(probeStoryId, 'theme:light');
   const lightSurface = JSON.parse(await evaluate(readSurface));
 
   await openStory(probeStoryId, 'theme:dark');
   const darkSurface = JSON.parse(await evaluate(readSurface));
 
-  return { light: lightSurface, dark: darkSurface };
+  await openStory(nativeProbeStoryId, 'theme:light');
+  const nativeSurface = JSON.parse(await evaluate(readNativeSurface));
+
+  return { light: lightSurface, dark: darkSurface, native: nativeSurface };
 });
 
-console.log('light:', JSON.stringify(light));
-console.log('dark: ', JSON.stringify(dark));
+console.log('light: ', JSON.stringify(light));
+console.log('dark:  ', JSON.stringify(dark));
+console.log('native:', JSON.stringify(native));
 
 const failures = [];
 
@@ -42,6 +51,9 @@ if (light.buttonBackground !== atlurePrimary) {
 }
 if (light.buttonBackground !== dark.buttonBackground) {
   failures.push('primary is theme-independent by design, but it changed');
+}
+if (native.buttonBackground !== atlurePrimary) {
+  failures.push(`the native primary button is not the Atlure primary token: ${native.buttonBackground}`);
 }
 
 if (failures.length > 0) {
