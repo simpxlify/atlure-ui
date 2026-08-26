@@ -11,6 +11,9 @@ export interface User {
   email: string;
   avatarUrl: string | null;
   place: Place | null;
+  bio: string | null;
+  phoneCountryCode: string | null;
+  phoneNumber: string | null;
   createdAt: IsoDateTime;
   sitterProfile: SitterProfile | null;
   activeRole: Role;
@@ -20,6 +23,8 @@ export interface SitterProfile {
   id: EntityId;
   userId: EntityId;
   slug: string;
+  professionalName: string;
+  avatarUrl: string | null;
   headline: string;
   about: string;
   serviceGroups: ServiceGroup[];
@@ -30,6 +35,8 @@ export interface SitterProfile {
   responseTimeMinutes: number | null;
   acceptsSpecies: string[];
   availability: DateRange[];
+  serviceCity: string | null;
+  serviceCountryCode: string | null;
 }
 
 export interface SitterSummary {
@@ -47,7 +54,7 @@ export interface SitterSummary {
 
 export interface PublicSitterProfile {
   slug: string;
-  displayName: string;
+  professionalName: string;
   avatarUrl: string | null;
   headline: string;
   about: string;
