@@ -1,5 +1,11 @@
 # @atlure/types
 
+## 0.12.0
+
+### Minor Changes
+
+- [#108](https://github.com/simpxlify/atlure-ui/pull/108) [`caf502f`](https://github.com/simpxlify/atlure-ui/commit/caf502f2a55d4988aceb1e7193ffd6bae39d41a5) Thanks [@simpxlify](https://github.com/simpxlify)! - Add privacy-first profile fields: User.{bio, phoneCountryCode, phoneNumber} and SitterProfile.{professionalName, avatarUrl, serviceCity, serviceCountryCode}. Rename PublicSitterProfile.displayName -> professionalName so guest reads match the rewritten public_sitter_profiles view (paw #119 / api #40).
+
 ## 0.11.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @atlure/ui
 
+## 0.12.0
+
+### Patch Changes
+
+- Updated dependencies [[`caf502f`](https://github.com/simpxlify/atlure-ui/commit/caf502f2a55d4988aceb1e7193ffd6bae39d41a5)]:
+  - @atlure/types@0.12.0
+  - @atlure/icons@0.12.0
+  - @atlure/tokens@0.12.0
+
 ## 0.11.0
 
 ### Minor Changes
