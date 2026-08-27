@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#fff7ed"/>
+  <g transform="translate(64 64)">
+    <rect width="120" height="120" rx="26" fill="#ea580c"/>
+    <path fill="#fff7ed" transform="scale(0.234375)" d="M330 372h-46v-24c-15 18-37 28-63 28-53 0-92-40-92-96 0-57 39-96 92-96 26 0 48 10 63 28v-24h46v184zm-46-92c0-32-22-54-52-54s-52 22-52 54 22 54 52 54 52-22 52-54z"/>
+  </g>
+  <text x="600" y="340" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="96" font-weight="700" letter-spacing="-3" text-anchor="middle" fill="#1e3a8a">atlure</text>
+  <text x="600" y="410" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="400" text-anchor="middle" fill="#1e3a8a" opacity="0.75">Trusted pet sitters, on demand.</text>
+</svg>
