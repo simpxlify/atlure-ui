@@ -1,5 +1,23 @@
 # @atlure/ui
 
+## 0.12.2
+
+### Patch Changes
+
+- [#118](https://github.com/simpxlify/atlure-ui/pull/118) [`2e35d94`](https://github.com/simpxlify/atlure-ui/commit/2e35d9475dd646e8022ab4a518e60159d0ba52d7) Thanks [@simpxlify](https://github.com/simpxlify)! - fix(input): also zero vertical padding on iOS for single-line Input
+
+  The Android-only fix from the previous patch fixed the caret drop on
+  Android but iOS TextInputs inside the fixed control heights were still
+  biasing text toward the bottom on some keyboard types (email address in
+  particular). Apply `paddingTop: 0, paddingBottom: 0` on iOS as well so
+  the caret and typed text sit in the vertical middle of the field on
+  both platforms. `includeFontPadding: false` remains Android-only.
+
+- Updated dependencies []:
+  - @atlure/icons@0.12.2
+  - @atlure/tokens@0.12.2
+  - @atlure/types@0.12.2
+
 ## 0.12.1
 
 ### Patch Changes
