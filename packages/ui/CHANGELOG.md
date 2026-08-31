@@ -1,5 +1,26 @@
 # @atlure/ui
 
+## 0.12.1
+
+### Patch Changes
+
+- [#113](https://github.com/simpxlify/atlure-ui/pull/113) [`110c63f`](https://github.com/simpxlify/atlure-ui/commit/110c63f65d412ed517febdd2d2d85144d71cf3b4) Thanks [@simpxlify](https://github.com/simpxlify)! - Fix WCAG AA color-contrast on primary, destructive, and muted token pairs. `primaryForeground` (light + dark) is now `slate900` on `orange600` (5.30:1). `destructiveForeground` (dark) is `slate900` on `red500` (4.88:1) — white was only 3.74:1. `mutedForeground` (dark) is `slate300` on `slate700` (6.90:1). Brand `primary` orange (`#ea580c`) is unchanged. Adds `slate300` to the palette for the muted-dark tier. Fixes ui #112.
+
+- [#117](https://github.com/simpxlify/atlure-ui/pull/117) [`8ac608b`](https://github.com/simpxlify/atlure-ui/commit/8ac608b7cb3156b569e2e8751414c5dce836761b) Thanks [@simpxlify](https://github.com/simpxlify)! - fix(input): vertically center text inside single-line Input on Android
+
+  The fixed control heights (`h-control-sm/md/lg`) plus RN's default
+  `includeFontPadding` and top-biased vertical alignment pushed the caret
+  and typed text below the vertical middle of the field on Android. The
+  Input now sets `textAlignVertical="center"` on single-line variants and
+  zeroes vertical padding + turns off `includeFontPadding` on Android so
+  the text sits in the middle of the box. Multiline inputs still start
+  at the top.
+
+- Updated dependencies [[`110c63f`](https://github.com/simpxlify/atlure-ui/commit/110c63f65d412ed517febdd2d2d85144d71cf3b4)]:
+  - @atlure/tokens@0.12.1
+  - @atlure/icons@0.12.1
+  - @atlure/types@0.12.1
+
 ## 0.12.0
 
 ### Patch Changes
