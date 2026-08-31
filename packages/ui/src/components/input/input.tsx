@@ -1,5 +1,5 @@
 import type { ComponentRef, ReactNode, Ref } from "react";
-import { TextInput, type TextInputProps, View } from "react-native";
+import { Platform, TextInput, type TextInputProps, View } from "react-native";
 
 import { cn } from "../../lib/cn";
 import { touchTargetHitSlop } from "../../lib/touch-target";
@@ -22,6 +22,10 @@ export interface InputProps extends Omit<TextInputProps, "editable" | "multiline
   ref?: Ref<ComponentRef<typeof TextInput>>;
 }
 
+const ANDROID_SINGLE_LINE_VERTICAL_FIX = Platform.OS === "android"
+  ? { paddingTop: 0, paddingBottom: 0, includeFontPadding: false as const }
+  : null;
+
 export function Input({
   size = "md",
   isDisabled,
@@ -32,12 +36,15 @@ export function Input({
   trailingIcon,
   className,
   nativeID,
+  style,
   ...textInputProps
 }: InputProps) {
   const field = useFormFieldControl();
   const isControlDisabled = isDisabled ?? field?.isDisabled ?? false;
   const isControlInvalid = isInvalid ?? field?.isInvalid ?? false;
   const isControlRequired = isRequired ?? field?.isRequired ?? false;
+
+  const verticalFix = isMultiline ? null : ANDROID_SINGLE_LINE_VERTICAL_FIX;
 
   const control = (
     <TextInput
@@ -51,6 +58,7 @@ export function Input({
       nativeID={nativeID ?? field?.nativeID}
       editable={!isControlDisabled}
       multiline={isMultiline}
+      textAlignVertical={isMultiline ? "top" : "center"}
       hitSlop={touchTargetHitSlop(size)}
       className={cn(
         inputVariants({
@@ -63,6 +71,7 @@ export function Input({
         }),
         className,
       )}
+      style={verticalFix ? [verticalFix, style] : style}
       {...textInputProps}
     />
   );
