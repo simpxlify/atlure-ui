@@ -22,9 +22,10 @@ export interface InputProps extends Omit<TextInputProps, "editable" | "multiline
   ref?: Ref<ComponentRef<typeof TextInput>>;
 }
 
-const ANDROID_SINGLE_LINE_VERTICAL_FIX = Platform.OS === "android"
-  ? { paddingTop: 0, paddingBottom: 0, includeFontPadding: false as const }
-  : null;
+const SINGLE_LINE_VERTICAL_FIX =
+  Platform.OS === "android"
+    ? { paddingTop: 0, paddingBottom: 0, includeFontPadding: false as const }
+    : { paddingTop: 0, paddingBottom: 0 };
 
 export function Input({
   size = "md",
@@ -44,7 +45,7 @@ export function Input({
   const isControlInvalid = isInvalid ?? field?.isInvalid ?? false;
   const isControlRequired = isRequired ?? field?.isRequired ?? false;
 
-  const verticalFix = isMultiline ? null : ANDROID_SINGLE_LINE_VERTICAL_FIX;
+  const verticalFix = isMultiline ? null : SINGLE_LINE_VERTICAL_FIX;
 
   const control = (
     <TextInput
