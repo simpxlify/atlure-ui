@@ -1,6 +1,6 @@
 {
   "name": "@atlure/tokens",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "description": "Atlure design tokens: the single source of truth for color, spacing, radius and type scales across web and React Native",
   "license": "MIT",
   "author": "David Moreira",
