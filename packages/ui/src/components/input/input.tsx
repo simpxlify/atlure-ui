@@ -22,10 +22,22 @@ export interface InputProps extends Omit<TextInputProps, "editable" | "multiline
   ref?: Ref<ComponentRef<typeof TextInput>>;
 }
 
+// `text-base` in the tailwind preset expands to `{ fontSize: 16, lineHeight:
+// 24 }`. On Android that 24px line box is centered inside the fixed control
+// height via gravity, but the visible glyph is drawn at the baseline INSIDE
+// that line box, which biases it below the geometric middle of the input.
+// Tighten the line height to just above the glyph height (fontSize × 1.15,
+// enough room for descenders) so the line box is roughly equal to the glyph
+// itself and the center of the line box IS the visible center of the text.
 const TEXT_INPUT_RESET =
   Platform.OS === "android"
-    ? { paddingTop: 0, paddingBottom: 0, includeFontPadding: false as const }
-    : { paddingTop: 0, paddingBottom: 0 };
+    ? {
+        paddingTop: 0,
+        paddingBottom: 0,
+        includeFontPadding: false as const,
+        lineHeight: 18,
+      }
+    : { paddingTop: 0, paddingBottom: 0, lineHeight: 18 };
 
 export function Input({
   size = "md",
