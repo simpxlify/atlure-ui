@@ -1,5 +1,23 @@
 # @atlure/ui
 
+## 0.12.3
+
+### Patch Changes
+
+- [#120](https://github.com/simpxlify/atlure-ui/pull/120) [`71b2fa5`](https://github.com/simpxlify/atlure-ui/commit/71b2fa5d9ad4022866f3cfab95b3394a30a91b26) Thanks [@simpxlify](https://github.com/simpxlify)! - fix(input): set lineHeight equal to the control height so text truly sits in the middle
+
+  Even with `textAlignVertical="center"` + `paddingVertical: 0` +
+  `includeFontPadding: false`, the system font's baseline metrics left
+  the typed text visually biased below the geometric middle of a fixed
+  `h-control-*` height. Set `lineHeight` per size (sm: 36, md: 40, lg: 48) on the TextInput so the glyph box fills the container height and
+  the text sits in the true vertical middle on both iOS and Android.
+  Multiline inputs are unaffected.
+
+- Updated dependencies []:
+  - @atlure/icons@0.12.3
+  - @atlure/tokens@0.12.3
+  - @atlure/types@0.12.3
+
 ## 0.12.2
 
 ### Patch Changes

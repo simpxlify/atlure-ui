@@ -1,6 +1,6 @@
 {
   "name": "@atlure/ui-web",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "description": "Atlure web components: the DOM render layer for the marketing surface, sharing cva variant recipes with @atlure/ui",
   "license": "MIT",
   "author": "David Moreira",
