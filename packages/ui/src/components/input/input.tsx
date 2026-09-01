@@ -4,8 +4,8 @@ import { Platform, TextInput, type TextInputProps, View } from "react-native";
 import { cn } from "../../lib/cn";
 import { touchTargetHitSlop } from "../../lib/touch-target";
 import {
-  inputFieldWrapperClassName,
   inputIconSlotVariants,
+  inputTextClassName,
   inputVariants,
   type InputVariantProps,
 } from "../../variants/input-variants";
@@ -22,24 +22,10 @@ export interface InputProps extends Omit<TextInputProps, "editable" | "multiline
   ref?: Ref<ComponentRef<typeof TextInput>>;
 }
 
-const CONTROL_HEIGHT_PX: Record<NonNullable<InputVariantProps["size"]>, number> = {
-  sm: 36,
-  md: 40,
-  lg: 48,
-};
-
-function singleLineVerticalFix(
-  size: NonNullable<InputVariantProps["size"]>,
-): { paddingTop: 0; paddingBottom: 0; lineHeight: number; includeFontPadding?: false } {
-  const base = {
-    paddingTop: 0 as const,
-    paddingBottom: 0 as const,
-    lineHeight: CONTROL_HEIGHT_PX[size],
-  };
-  return Platform.OS === "android"
-    ? { ...base, includeFontPadding: false as const }
-    : base;
-}
+const TEXT_INPUT_RESET =
+  Platform.OS === "android"
+    ? { paddingTop: 0, paddingBottom: 0, includeFontPadding: false as const }
+    : { paddingTop: 0, paddingBottom: 0 };
 
 export function Input({
   size = "md",
@@ -59,22 +45,8 @@ export function Input({
   const isControlInvalid = isInvalid ?? field?.isInvalid ?? false;
   const isControlRequired = isRequired ?? field?.isRequired ?? false;
 
-  const verticalFix = isMultiline ? null : singleLineVerticalFix(size);
-
-  const control = (
-    <TextInput
-      accessibilityState={{ disabled: isControlDisabled }}
-      accessibilityLabelledBy={field?.labelledBy}
-      aria-labelledby={field?.labelledBy}
-      aria-describedby={field?.describedBy}
-      aria-disabled={isControlDisabled}
-      aria-invalid={isControlInvalid}
-      aria-required={isControlRequired}
-      nativeID={nativeID ?? field?.nativeID}
-      editable={!isControlDisabled}
-      multiline={isMultiline}
-      textAlignVertical={isMultiline ? "top" : "center"}
-      hitSlop={touchTargetHitSlop(size)}
+  return (
+    <View
       className={cn(
         inputVariants({
           size,
@@ -86,21 +58,27 @@ export function Input({
         }),
         className,
       )}
-      style={verticalFix ? [verticalFix, style] : style}
-      {...textInputProps}
-    />
-  );
-
-  if (!leadingIcon && !trailingIcon) {
-    return control;
-  }
-
-  return (
-    <View className={inputFieldWrapperClassName}>
+    >
       {leadingIcon ? (
         <View className={inputIconSlotVariants({ slot: "leading" })}>{leadingIcon}</View>
       ) : null}
-      {control}
+      <TextInput
+        accessibilityState={{ disabled: isControlDisabled }}
+        accessibilityLabelledBy={field?.labelledBy}
+        aria-labelledby={field?.labelledBy}
+        aria-describedby={field?.describedBy}
+        aria-disabled={isControlDisabled}
+        aria-invalid={isControlInvalid}
+        aria-required={isControlRequired}
+        nativeID={nativeID ?? field?.nativeID}
+        editable={!isControlDisabled}
+        multiline={isMultiline}
+        textAlignVertical={isMultiline ? "top" : "center"}
+        hitSlop={touchTargetHitSlop(size)}
+        className={inputTextClassName}
+        style={[TEXT_INPUT_RESET, style]}
+        {...textInputProps}
+      />
       {trailingIcon ? (
         <View className={inputIconSlotVariants({ slot: "trailing" })}>{trailingIcon}</View>
       ) : null}

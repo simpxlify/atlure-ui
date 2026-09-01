@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 export const inputVariants = cva(
-  "w-full rounded-md border bg-input-background px-md text-base text-foreground placeholder:text-muted-foreground",
+  "w-full flex-row items-center rounded-md border bg-input-background px-md",
   {
     variants: {
       size: {
@@ -18,7 +18,7 @@ export const inputVariants = cva(
         false: "",
       },
       isMultiline: {
-        true: "h-auto min-h-control-lg py-sm",
+        true: "h-auto min-h-control-lg py-sm items-start",
         false: "",
       },
       hasLeadingIcon: {
@@ -40,6 +40,9 @@ export const inputVariants = cva(
     },
   },
 );
+
+export const inputTextClassName =
+  "flex-1 text-base text-foreground placeholder:text-muted-foreground";
 
 export const inputIconSlotVariants = cva("absolute inset-y-0 justify-center", {
   variants: {
