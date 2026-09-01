@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { cn } from "../lib/cn";
-import { inputIconSlotVariants, inputVariants } from "./input-variants";
+import { inputIconSlotVariants, inputTextClassName, inputVariants } from "./input-variants";
 import { textareaVariants } from "./textarea-variants";
 
 const SIZES = ["sm", "md", "lg"] as const;
@@ -14,9 +14,14 @@ describe("When an input is resolved", () => {
   });
 
   it("colours the placeholder from a token rather than a runtime lookup", () => {
+    expect(inputTextClassName).toContain("placeholder:text-muted-foreground");
     for (const size of SIZES) {
-      expect(inputVariants({ size }), size).toContain("placeholder:text-muted-foreground");
+      expect(inputVariants({ size }), size).toContain("flex-row");
     }
+  });
+
+  it("centres the field content vertically via flexbox on single-line inputs", () => {
+    expect(inputVariants({ isMultiline: false })).toContain("items-center");
   });
 
   it("borders an invalid input in the destructive token", () => {
