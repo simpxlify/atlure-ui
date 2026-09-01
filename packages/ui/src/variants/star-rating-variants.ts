@@ -9,7 +9,7 @@ export const starRatingIconSize = {
 export type StarRatingSize = keyof typeof starRatingIconSize;
 
 export const starRatingClassName = "flex-row items-center gap-xs";
-export const starRatingFilledClassName = "text-warning";
+export const starRatingFilledClassName = "text-primary";
 export const starRatingEmptyClassName = "text-muted-foreground";
 
 export const starRatingValueVariants = cva("font-medium text-muted-foreground", {
