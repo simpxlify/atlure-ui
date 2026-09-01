@@ -1,6 +1,6 @@
 {
   "name": "@atlure/types",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "description": "Atlure domain model: shared entity and value types for the mobile app, the marketing site and the backend",
   "license": "MIT",
   "author": "David Moreira",
