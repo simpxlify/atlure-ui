@@ -1,5 +1,29 @@
 # @atlure/ui
 
+## 0.12.5
+
+### Patch Changes
+
+- [#124](https://github.com/simpxlify/atlure-ui/pull/124) [`8481be7`](https://github.com/simpxlify/atlure-ui/commit/8481be77eddf69ec04499514b34366ae389aed96) Thanks [@simpxlify](https://github.com/simpxlify)! - fix(input): tighten TextInput lineHeight so the visible text truly centers
+
+  Root cause analysis: `text-base` in the tailwind preset expands to `{ fontSize:
+16, lineHeight: 24 }`. Inside a fixed-height wrapper on Android, gravity centers
+  the 24px line box in the container — but the glyph inside that line box is drawn
+  at the font baseline, which places it in the lower portion of the line box.
+  Result: the caret sits at container center (the natural center of the line box)
+  but the visible text appears below.
+
+  Fix: override the tailwind `lineHeight: 24` with `lineHeight: 18` on the
+  TextInput style (fontSize × ~1.15, still enough room for descenders). The line
+  box is now nearly equal to the glyph height, so the baseline-drawn glyph
+  occupies the whole line box and its visible center IS the container center on
+  both platforms.
+
+- Updated dependencies []:
+  - @atlure/icons@0.12.5
+  - @atlure/tokens@0.12.5
+  - @atlure/types@0.12.5
+
 ## 0.12.4
 
 ### Patch Changes
