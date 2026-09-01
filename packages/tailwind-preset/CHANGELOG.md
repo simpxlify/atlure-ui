@@ -1,5 +1,7 @@
 # @atlure/tailwind-preset
 
+## 0.12.5
+
 ## 0.12.4
 
 ## 0.12.3
