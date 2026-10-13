@@ -1,5 +1,20 @@
 # @atlure/ui
 
+## 0.12.6
+
+### Patch Changes
+
+- [#126](https://github.com/simpxlify/atlure-ui/pull/126) [`502ba50`](https://github.com/simpxlify/atlure-ui/commit/502ba503fb06ce56f08d001f73e3b750f3c3f998) Thanks [@simpxlify](https://github.com/simpxlify)! - feat(star-rating): paint filled stars with the primary brand color
+
+  Change the filled-star class from `text-warning` (yellow) to
+  `text-primary` so the stars match the brand mark on both light and
+  dark themes. Empty stars stay muted-foreground.
+
+- Updated dependencies []:
+  - @atlure/icons@0.12.6
+  - @atlure/tokens@0.12.6
+  - @atlure/types@0.12.6
+
 ## 0.12.5
 
 ### Patch Changes
